@@ -1,0 +1,43 @@
+<?php 
+
+return [
+	361660 => [
+		'id' => 361660,
+		'login' => '77004163092',
+		'username' => 'Admin',
+		'email' => '77004163092@ya.ru',
+		'role' => 'rAdministrator',
+		'status' => '10',
+		'auth_key' => 'mOZIDYs-pZ0_Wp1y6P-brqiPYhcr2d_N',
+		'password_hash' => '$2y$13$pX5m2S3tAlk9LiBNzsQi6u4z2bZ1xye926WQS5uCi0l1gO5hrB6oy',
+		'password_reset_token' => null,
+		'created_at' => '1497349018',
+		'updated_at' => '1497349018',
+	],
+	363614 => [
+		'id' => 363614,
+		'login' => 'moderator',
+		'username' => 'Moderator',
+		'email' => 'moderator@ya.ru',
+		'role' => 'rModerator',
+		'status' => '10',
+		'auth_key' => '_4vikAjJwdO2zzeVszuKy7ZJkVBX7H4x',
+		'password_hash' => '$2y$13$ENeccVzoamQa..p.qJdkP.O9I5YhMM4TEp/C990UjO25VMbBidybu',
+		'password_reset_token' => null,
+		'created_at' => '1497349471',
+		'updated_at' => '1497349471',
+	],
+	381069 => [
+		'id' => 381069,
+		'login' => '77783177384',
+		'username' => 'User',
+		'email' => '77783177384@ya.ru',
+		'role' => 'rUnknownUser',
+		'status' => '10',
+		'auth_key' => '_4NwujbiQAHRGDdSEaDPsGaQKACeYxGI',
+		'password_hash' => '$2y$13$FY.H3FZA/9q89vKK/cCTBey.8VY1HDhWadedGTzcq8NcXmPcf30Xu',
+		'password_reset_token' => null,
+		'created_at' => '1497349134',
+		'updated_at' => '1497349134',
+	],
+];

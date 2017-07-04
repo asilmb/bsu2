@@ -1,0 +1,8 @@
+{
+  "name": "amount",
+  "title": "Сумма",
+  "type": "number",
+  "min_length": 1,
+  "max_length": 8,
+  "mask": ""
+}

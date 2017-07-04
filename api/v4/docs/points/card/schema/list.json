@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "approve": {
+        "type": "boolean"
+      },
+      "card_mask": {
+        "type": "string"
+      },
+      "bank_name": {
+        "type": "string"
+      },
+      "reference": {
+        "type": "string"
+      }
+    }
+  }
+}

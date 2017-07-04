@@ -1,0 +1,10 @@
+description: "Сводные данные"
+get:
+    description: "Возвращает все сводные данные в виде дерева"
+    is: !include /is/get-details.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    #type: !include schema/list.json
+                    example: !include example/tree.json

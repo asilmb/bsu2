@@ -1,0 +1,32 @@
+[
+  {
+    "id": 7953,
+    "hb_id": 2863,
+    "mask": "440564-XX-XXXX-6374",
+    "approve": false,
+    "reference": "170427114625",
+    "bank": {
+      "id": 31,
+      "code": 926,
+      "bik": "KZKOKZKX",
+      "name": "АО \"КАЗКОММЕРЦБАНК\"",
+      "bin": "911040000021",
+      "picture": null
+    }
+  },
+  {
+    "id": 7955,
+    "hb_id": 2137,
+    "mask": "548318-XX-XXXX-0293",
+    "approve": true,
+    "reference": "170412144734",
+    "bank": {
+      "id": 31,
+      "code": 926,
+      "bik": "KZKOKZKX",
+      "name": "АО \"КАЗКОММЕРЦБАНК\"",
+      "bin": "911040000021",
+      "picture": null
+    }
+  }
+]

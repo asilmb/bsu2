@@ -1,0 +1,35 @@
+description: "Банковские карты"
+get:
+    description: "Возвращает список карт"
+    is: !include /is/simple/get-list.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    #type: !include schema/list.json
+                    example: !include example/list.json
+/{id}:
+    uriParameters:
+        id:
+            description: "ID карты"
+            type: integer
+    get:
+        description: "Возвращает карту"
+        is: !include /is/simple/get-details.raml
+        responses:
+            200:
+                body:
+                    application/json:
+                        #type: !include schema/details.json
+                        example: !include example/details.json
+    put:
+        description: "Привязать карту"
+        is: !include /is/put.raml
+        body:
+            application/json:
+                #type: !include schema/edit.json
+                example: !include example/approve.json
+
+    delete:
+        description: "Удалить карту"
+        is: !include /is/delete.raml

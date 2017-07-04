@@ -1,0 +1,48 @@
+description: "Страны"
+get:
+    description: |
+        Возвращает список стран
+
+        Для вывода всего списка пишем: `per-page=9999999`
+    is: !include /is/get-list.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    #type: !include schema/list.json
+                    example: !include example/list.json
+post:
+    securedBy: [TPSAuth]
+    description: "Создать страну"
+    is: !include /is/post.raml
+    body:
+        application/json:
+            #type: !include schema/add.json
+            example: !include example/add.json
+
+/{id}:
+    uriParameters:
+        id:
+            description: "ID страны"
+            type: integer
+    get:
+        description: "Возвращает страну"
+        is: !include /is/get-details.raml
+        responses:
+            200:
+                body:
+                    application/json:
+                        #type: !include schema/details.json
+                        example: !include example/details.json
+    put:
+        securedBy: [TPSAuth]
+        description: "Изменить страну"
+        is: !include /is/put.raml
+        body:
+            application/json:
+                #type: !include schema/edit.json
+                example: !include example/edit.json
+    delete:
+        securedBy: [TPSAuth]
+        description: "Удалить страну"
+        is: !include /is/delete.raml

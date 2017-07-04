@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "id_country": "1",
+    "region_id": "1",
+    "city_name": "Темиртау",
+    "position": 23,
+    "status": 0,
+    "date_change": "2015-02-16 10:14:49"
+  },
+  {
+    "id": "2",
+    "id_country": "1",
+    "region_id": "4",
+    "city_name": "Медео",
+    "position": 22,
+    "status": 0,
+    "date_change": "2016-04-27 09:54:23.265307"
+  },
+]

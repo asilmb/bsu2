@@ -1,0 +1,16 @@
+post:
+    description: "Загрузить логотип"
+    is: !include /is/post.raml
+    body:
+        multipart/form-data:
+            description: The file to be uploaded.
+            required: true
+            type: file
+    responses:
+        200:
+            body:
+                application/json:
+                    example: !include example/response.json
+delete:
+    description: "Удалить логотип"
+    is: !include /is/delete.raml

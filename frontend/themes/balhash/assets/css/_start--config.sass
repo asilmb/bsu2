@@ -1,0 +1,31 @@
+body,a,h1,h2,h3,h4,p,b,span
+  padding: 0
+  margin: 0
+  font-family: "Roboto"
+  font-weight: 400
+  font-size: 16px
+
+a
+  text-decoration: none
+  color: inherit
+.position
+  margin: auto
+  position: absolute
+  &.center--center
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+  &.center
+    left: 0
+    right: 0
+.container
+  margin: 0 auto
+  width: 1200px
+.clearfix
+  &:before, &:after
+    content: "\0020"
+    display: block
+    height: 0
+    visibility: hidden
+    clear: both

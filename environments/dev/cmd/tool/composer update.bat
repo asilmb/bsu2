@@ -1,0 +1,2 @@
+cd ..\..
+composer.cmd update

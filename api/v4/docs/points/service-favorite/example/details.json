@@ -1,0 +1,29 @@
+{
+  "id": 513,
+  "service_id": 304,
+  "name": "altel",
+  "parent_id": null,
+  "title": "3к3",
+  "description": "Технология LTE запущена в Казахстане под маркой «ALTEL 4G»",
+  "picture": "service5656ec6461fee7.85097069.png",
+  "picture_url": "http:\/\/static.test.wooppay.com\/service\/service5656ec6461fee7.85097069.png",
+  "synonyms": "алтел",
+  "fields": [
+    {
+      "name": "account",
+      "title": "Номер телефона",
+      "type": "string",
+      "mask": "+7 (999)999-99-99",
+      "value": "7004163092",
+      "is_need_send": true
+    },
+    {
+      "name": "amount",
+      "title": "Сумма",
+      "type": "amount",
+      "mask": null,
+      "value": 100,
+      "is_need_send": true
+    }
+  ]
+}

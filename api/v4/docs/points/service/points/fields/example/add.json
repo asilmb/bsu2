@@ -1,0 +1,8 @@
+{
+  "name": "account",
+  "title": "Аккаунт",
+  "type": "string",
+  "min_length": 14,
+  "max_length": 14,
+  "mask": "+7(999)9999999"
+}

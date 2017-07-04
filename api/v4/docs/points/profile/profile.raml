@@ -1,0 +1,38 @@
+description: "Профиль"
+/{id}:
+    uriParameters:
+        id:
+            description: "Логин пользователя"
+            type: string
+    get:
+        securedBy: [TPSAuth]
+        description: "Возвращает профиль"
+        is: !include /is/get-details.raml
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: !include example/details.json
+    put:
+        securedBy: [TPSAuth]
+        description: "Изменить данные профиля"
+        is: !include /is/put.raml
+        body:
+            application/json:
+                example: !include example/edit.json
+    /email:
+        put:
+            securedBy: [TPSAuth]
+            description: "Изменить почту"
+            is: !include /is/put.raml
+            body:
+                application/json:
+                    example: !include example/edit-email.json
+    /password:
+            put:
+                securedBy: [TPSAuth]
+                description: "Изменить пароль"
+                is: !include /is/put.raml
+                body:
+                    application/json:
+                        example: !include example/edit-password.json

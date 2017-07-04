@@ -1,0 +1,2 @@
+php init
+pause

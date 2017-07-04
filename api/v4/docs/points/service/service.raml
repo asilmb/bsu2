@@ -1,0 +1,49 @@
+description: "Сервисы"
+get:
+    description: "Возвращает список сервисов"
+    is: !include /is/get-list.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    #type: !include schema/list.json
+                    example: !include example/list.json
+    queryParameters:
+        category:
+            type: integer
+            description: Категория
+            required: false
+            minimum: 1
+#post:
+#    description: "Создать сервис"
+#    is: !include /is/post.raml
+#    body:
+#        application/json:
+#            #type: !include schema/add.json
+#            example: !include example/add.json
+/{id}:
+    uriParameters:
+        id:
+            description: "ID сервиса"
+            type: integer
+    get:
+        description: "Возвращает сервис"
+        is: !include /is/get-details.raml
+        responses:
+            200:
+                body:
+                    application/json:
+                        #type: !include schema/details.json
+                        example: !include example/details.json
+    #put:
+    #    description: "Изменить сервис"
+    #    is: !include /is/put.raml
+    #    body:
+    #        application/json:
+    #            #type: !include schema/edit.json
+    #            example: !include example/edit.json
+    #delete:
+    #    description: "Удалить сервис"
+    #    is: !include /is/delete.raml
+    #/logo: !include /helper-points/logo/logo.raml
+    #/fields: !include points/fields/fields.raml

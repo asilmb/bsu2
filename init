@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+use yii2lab\init\Init;
+
+require_once(__DIR__ . '/vendor/yii2lab/yii2-init/src/Init.php');
+
+$config = require(__DIR__ . '/environments/config.php');
+Init::run(__DIR__, $config);

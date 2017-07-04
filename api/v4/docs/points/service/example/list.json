@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1183,
+    "name": "erc_m",
+    "parent_id": null,
+    "title": "Астана ЕРЦ",
+    "description": "<p>2007452</p><p>ТОО «Астана-ЕРЦ» - специализированное предприятие, основной задачей которого является совершенствование системы расчетов и сбора платежей за коммунальные услуги. Доминантным учредителем компании является государство.</p><p>На текущий момент компания обслуживает более 215 тысяч лицевых счетов и сотрудничает с более 383 поставщиками услуг.</p>",
+    "picture": null,
+    "picture_url": null,
+    "synonyms": "ерк_м",
+    "fields": [
+      {
+        "name": "account",
+        "title": "Номер лицевого",
+        "type": "string",
+        "mask": null,
+        "value": null,
+        "is_need_send": false
+      },
+      {
+        "name": "invoiceId",
+        "title": "InvoiceId",
+        "type": "string",
+        "mask": null,
+        "value": null,
+        "is_need_send": false
+      },
+      {
+        "name": "amount",
+        "title": "Сумма",
+        "type": "amount_group",
+        "mask": null,
+        "value": null,
+        "is_need_send": false
+      }
+    ]
+  },
+  {
+    "id": 1202,
+    "name": "transfer_1202",
+    "parent_id": null,
+    "title": "Перевод пользователю 77471105109",
+    "description": null,
+    "picture": "service57c76ae5654274.81703589.jpg",
+    "picture_url": "http:\/\/static.test.wooppay.com\/service\/service57c76ae5654274.81703589.jpg",
+    "synonyms": "трансфер_1202",
+    "fields": [
+      {
+        "name": "amount",
+        "title": "Сумма перевода",
+        "type": "amount",
+        "mask": null,
+        "value": null,
+        "is_need_send": false
+      }
+    ]
+  }
+]

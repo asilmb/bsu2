@@ -1,0 +1,40 @@
+get:
+    description: "Возвращает список полей сервиса"
+    is: !include /is/get-list.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    #type: !include schema/list.json
+                    example: !include example/list.json
+post:
+    description: "Создать поле сервиса"
+    is: !include /is/post.raml
+    body:
+        application/json:
+            #type: !include schema/add.json
+            example: !include example/add.json
+# /{field_id}:
+    # uriParameters:
+        # field_id:
+            # description: "ID поля сервиса"
+            # type: integer
+    # get:
+        # description: "Возвращает поле сервиса"
+        # is: !include /is/get-details.raml
+        # responses:
+            # 200:
+                # body:
+                    # application/json:
+                        # type: !include schema/details.json
+                        # example: !include example/details.json
+    # put:
+        # description: "Изменить  поле сервиса"
+        # is: !include /is/put.raml
+        # body:
+            # application/json:
+                # type: !include schema/edit.json
+                # example: !include example/edit.json
+    # delete:
+        # description: "Удалить поле сервиса"
+        # is: !include /is/delete.raml

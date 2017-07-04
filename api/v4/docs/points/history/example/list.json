@@ -1,0 +1,74 @@
+[
+  {
+    "id": 50015832,
+    "amount": 350,
+    "status": 14,
+    "description": null,
+    "type": 203,
+    "title": "Пользовательский перевод",
+    "paymentAccount": "77026142577",
+    "direction": 0,
+    "serviceId": 370,
+    "picture_url": "http:\/\/static.test.wooppay.com\/service\/service55ba1260589c48.07964479.png",
+    "externalId": "20170701044515",
+    "dateOper": "2017-07-01T10:45:16Z",
+    "dateDone": "2017-07-01T10:45:16Z",
+    "dateModify": null,
+    "reqStat": "refill",
+    "receipt": {
+      "subjectFrom": "kazpostsub2",
+      "subjectFromLastName": "kazpostsub2",
+      "subjectTo": "77026142577",
+      "subjectToId": 372247,
+      "specialistId": 381969,
+      "specialist": "kazpostsub2",
+      "specialistLastName": "kazpostsub2",
+      "commission": null,
+      "amount": null
+    },
+    "billingInfo": {
+      "fields": {
+        "txn_id": "20170701044515",
+        "service_id": 370,
+        "target": "77026142577"
+      },
+      "serviceName": "address_transfer"
+    }
+  },
+  {
+    "id": 50015830,
+    "amount": 350,
+    "status": 14,
+    "description": null,
+    "type": 203,
+    "title": "Пользовательский перевод",
+    "paymentAccount": "77026142577",
+    "direction": 0,
+    "serviceId": 370,
+    "picture_url": "http:\/\/static.test.wooppay.com\/service\/service55ba1260589c48.07964479.png",
+    "externalId": "20170701044446",
+    "dateOper": "2017-07-01T10:44:46Z",
+    "dateDone": "2017-07-01T10:44:46Z",
+    "dateModify": null,
+    "reqStat": "refill",
+    "receipt": {
+      "subjectFrom": "kazpostsub2",
+      "subjectFromLastName": "kazpostsub2",
+      "subjectTo": "77026142577",
+      "subjectToId": 372247,
+      "specialistId": 381969,
+      "specialist": "kazpostsub2",
+      "specialistLastName": "kazpostsub2",
+      "commission": null,
+      "amount": null
+    },
+    "billingInfo": {
+      "fields": {
+        "txn_id": "20170701044446",
+        "service_id": 370,
+        "target": "77026142577"
+      },
+      "serviceName": "address_transfer"
+    }
+  }
+]

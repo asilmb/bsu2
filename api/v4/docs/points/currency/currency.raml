@@ -1,0 +1,48 @@
+description: "Валюты"
+get:
+    description: |
+        Возвращает список валют
+
+        Для вывода всего списка пишем: `per-page=9999999`
+    is: !include /is/get-list.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    #type: !include schema/list.json
+                    example: !include example/list.json
+post:
+    securedBy: [TPSAuth]
+    description: "Создать валюту"
+    is: !include /is/post.raml
+    body:
+        application/json:
+            #type: !include schema/add.json
+            example: !include example/add.json
+
+/{id}:
+    uriParameters:
+        id:
+            description: "ID валюты"
+            type: integer
+    get:
+        description: "Возвращает валюту"
+        is: !include /is/get-details.raml
+        responses:
+            200:
+                body:
+                    application/json:
+                        #type: !include schema/details.json
+                        example: !include example/details.json
+    put:
+        securedBy: [TPSAuth]
+        description: "Изменить валюту"
+        is: !include /is/put.raml
+        body:
+            application/json:
+                #type: !include schema/edit.json
+                example: !include example/edit.json
+    delete:
+        securedBy: [TPSAuth]
+        description: "Удалить валюту"
+        is: !include /is/delete.raml

@@ -1,0 +1,31 @@
+description: "История транзакций"
+get:
+    description: "Возвращает всю историю транзакций"
+    is: !include /is/get-list.raml
+    responses:
+        200:
+            body:
+                application/json:
+                    #type: !include schema/list.json
+                    example: !include example/list.json
+/{id}:
+    uriParameters:
+        id:
+            description: "ID транзакции"
+            type: integer
+    get:
+        description: |
+            Возвращает транзакцию
+
+            direction:
+
+            * 0: incoming
+            * 1: outgoing
+            * 2: external
+        is: !include /is/get-details.raml
+        responses:
+            200:
+                body:
+                    application/json:
+                        #type: !include schema/details.json
+                        example: !include example/details.json

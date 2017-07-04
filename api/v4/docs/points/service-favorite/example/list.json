@@ -1,0 +1,60 @@
+[
+  {
+    "id": 513,
+    "service_id": 304,
+    "name": "altel",
+    "parent_id": null,
+    "title": "3к3",
+    "description": "Технология LTE запущена в Казахстане под маркой «ALTEL 4G»",
+    "picture": "service5656ec6461fee7.85097069.png",
+    "picture_url": "http:\/\/static.test.wooppay.com\/service\/service5656ec6461fee7.85097069.png",
+    "synonyms": "алтел",
+    "fields": [
+      {
+        "name": "account",
+        "title": "Номер телефона",
+        "type": "string",
+        "mask": "+7 (999)999-99-99",
+        "value": "7004163092",
+        "is_need_send": true
+      },
+      {
+        "name": "amount",
+        "title": "Сумма",
+        "type": "amount",
+        "mask": null,
+        "value": 100,
+        "is_need_send": true
+      }
+    ]
+  },
+  {
+    "id": 515,
+    "service_id": 306,
+    "name": "addressless_transfer",
+    "parent_id": null,
+    "title": "Безадресный перевод",
+    "description": "<p>Этот текст можно опустить<\/p>",
+    "picture": null,
+    "picture_url": null,
+    "synonyms": "аддресслесс_трансфер",
+    "fields": [
+      {
+        "name": "target",
+        "title": "Телефон или email",
+        "type": "string",
+        "mask": null,
+        "value": "csvitalts@rambler.ru",
+        "is_need_send": true
+      },
+      {
+        "name": "amount",
+        "title": "Сумма перевода",
+        "type": "amount",
+        "mask": null,
+        "value": 1000,
+        "is_need_send": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,22 @@
+<?php
+
+return [
+	1 => [
+		'code' => '1',
+		'name_short' => 'Казахстан',
+		'name_full' => 'РЕСПУБЛИКА КАЗАХСТАН',
+		'symb_def2' => 'KZ',
+		'symb_def3' => 'KAZ',
+		'code_curr' => '1',
+		'date_change' => '2015-11-25 09:24:44',
+	],
+	2 => [
+		'code' => '2',
+		'name_short' => 'Россия',
+		'name_full' => 'Российская Федерация',
+		'symb_def2' => 'RU',
+		'symb_def3' => 'RUR',
+		'code_curr' => '2',
+		'date_change' => '2016-08-25 09:39:27',
+	],
+];

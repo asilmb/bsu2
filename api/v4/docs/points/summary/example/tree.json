@@ -1,0 +1,20 @@
+{
+  "static_id": {
+    "category_root": 58,
+    "addressless_transfer": 306,
+    "cnp_withdrawal": 320,
+    "iban_payment": 818
+  },
+  "url": {
+    "avatars": "http://static.wooppay.com/avatar/",
+    "bank_pictures": "http://static.wooppay.com/bank/",
+    "service_menu_pictures": "http://static.wooppay.com/service_menu/",
+    "service_pictures": "http://static.wooppay.com/service/"
+  },
+  "last_modified": {
+    "city": "2017-05-05T13:17:23Z",
+    "country": "2016-08-25T09:39:27Z",
+    "service": "2017-05-25T17:23:24Z",
+    "service_category": "2017-05-25T18:04:35Z"
+  }
+}
