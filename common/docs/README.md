@@ -12,6 +12,17 @@
 * [Создание](vendor-create.md)
 * [Версионирование](vendor-versioning.md)
 
+Пользовательсские настройки
+--------------------
+* [Настройка кабинета Администратора](settings-cabinet-admin.md)
+
+
+Пользователи и Роли
+--------------------
+* [Создание разрешений](roles-create-permissions.md)
+* [Создание ролей](roles-create.md)
+
+
 <div style="display: none">
 Данное руководство выпущено в соответствии с [положениями о документации Yii](http://www.yiiframework.com/doc/terms/).
 

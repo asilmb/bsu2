@@ -32,6 +32,10 @@ return [
 			'class' => 'backend\modules\app\Module',
 			'as access' => $access,
 		],
+		'content' => [
+			'class' => 'common\modules\content\Module',
+			'as access' => $access,
+		],
 		'rbac' => [
 			'class' => 'mdm\admin\Module',
 			'controllerMap' => [

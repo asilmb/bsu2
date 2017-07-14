@@ -15,19 +15,19 @@
     "minimum-stability": "stable",
     "require": {
 		"yiisoft/yii2": "2.0.*",
-		
+
 		"yiisoft/yii2-bootstrap": "2.0.6.0",
         "yiisoft/yii2-swiftmailer": "2.0.7",
-		
+
 		"bower-asset/admin-lte": "~2.0",
         "bower-asset/font-awesome": "~4.0",
-		
+
 		"kartik-v/yii2-widgets": "3.4.0.0",
 		"comodojo/zip": "*",
 		"mdmsoft/yii2-admin": "~2.0",
 		"deesoft/yii2-console": "1.1.0.0",
         "zhuravljov/yii2-logreader": "*",
-		
+
 		"yii2lab/yii2-app": "0.0.*",
 		"yii2lab/yii2-init": "0.0.*",
 		"yii2lab/yii2-console": "0.0.*",
@@ -40,7 +40,7 @@
         "yii2lab/yii2-misc": "0.0.*",
 		"yii2lab/yii2-user": "0.0.*",
 		"yii2lab/yii2-ubuntu-font": "0.0.*",
-		
+
 		"yii2module/yii2-offline": "0.0.*",
 		"yii2module/yii2-environments": "0.0.*",
 		"yii2module/yii2-fixture": "0.0.*",
@@ -51,16 +51,18 @@
 		"yii2module/yii2-lang": "0.0.*",
 		"yii2module/yii2-rest-client": "0.0.*",
 		"yii2module/yii2-restapidoc": "0.0.*",
-		
+
         "yii2woop/yii2-tps": "dev-master",
-		
+
+        "cyneek/yii2-upload-behavior": "*",
+
 		"php": ">=5.4.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
         "yiisoft/yii2-gii": "~2.0.0",
 		"yiisoft/yii2-apidoc": "~2.0.0",
-		
+
 		"guzzlehttp/guzzle": "*",
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1"

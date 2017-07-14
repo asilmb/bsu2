@@ -344,4 +344,7 @@ return [
     'user.profile.*' => [
         'type' => 2,
     ],
+    'app.cache.*' => [
+        'type' => 2,
+    ],
 ];

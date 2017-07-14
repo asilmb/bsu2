@@ -8,6 +8,7 @@ return [
 		[
 			'name' => 'app',
 		],
+	
 		[
 			'name' => 'gii',
 			'icon' => '<i class="fa fa-flask"></i>',
@@ -21,6 +22,13 @@ return [
 		],
 		[
 			'name' => 'logreader',
+		],
+		[
+			'label' => 'entity',
+			'options' => ['class' => 'header'],
+		],
+		[
+			'name' => 'content',
 		],
 		/* [
 			'name' => 'rbac',
