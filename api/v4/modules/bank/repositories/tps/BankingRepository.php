@@ -37,10 +37,3 @@ class BankingRepository extends TpsRepository {
 		return $response->data;
 	}
 }
-//	{
-//"request": {
-//"@method":"PARSING_DATA_R",
-//"@rid":"771fa9a021644d588a11c562642cae7c1",
-//"@service":"service-4321",
-//"session":{	"@id":"881fa9a021644d588a11c562642cae7c","@institution":"sber","@create":true},
-//"parse":{"@type":"products"}}}

@@ -1,24 +1,43 @@
 <?php
 
 return [
+	'params' => ['CardLinkingType'=>'wooppay'],
 	'mainMenu' => [
 		[
 			'label' => 'Rest',
-			'name' => 'rest-client',
-			//'url' => ['/rest-client'],
+			'url' => 'rest-client',
 			'access' => ['rest-client.*'],
 		],
-		/*[
-			'label' => 'Rest test',
-			'name' => 'rest-client-test',
-			//'url' => ['/rest-client'],
-			'access' => ['rest-client.*'],
-		],*/
+		[
+			'label' => 'transaction',
+			'access' => ['@'],
+			'module' => 'transaction',
+			'items' => [
+				[
+					'label' => 'payment',
+					'url' => 'transaction\payment',
+				],
+				[
+					'label' => 'history',
+					'url' => 'history',
+				],
+				[
+					'label' => 'convertation',
+					'url' => 'convertation',
+				],
+			],
+		],
+		[
+			'label' => 'qr-code',
+			'url' => '#',
+			'module' => 'qrcode',
+			'access' => ['@'],
+		],
 	],
 	'rightMenu' => [
 		[
 			'label' => 'User',
-			'name' => 'user',
+			'module' => 'user',
 			'class' => 'common\modules\user\helpers\Navigation',
 		],
 	],

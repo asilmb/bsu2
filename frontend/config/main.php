@@ -4,7 +4,7 @@ return [
 	'bootstrap' => [],
 	'components' => [
 		'user' => [
-			'identityClass' => 'yii2lab\user\models\identity\Disc',
+			//'identityClass' => 'yii2lab\user\models\identity\Disc',
 			'enableAutoLogin' => true,
 			'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
 			'loginUrl'=>['user/auth/login'],
@@ -27,7 +27,7 @@ return [
 		'urlManager' => [
 			'rules' => [
 				''=> 'balhash',
-				'admin'=> 'admin',
+
 			],
 		],
 	],
