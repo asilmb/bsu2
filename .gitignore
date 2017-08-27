@@ -35,3 +35,6 @@ phpunit.phar
 
 /composer.lock
 .idea/
+
+# vagrant runtime
+*/node_modules
