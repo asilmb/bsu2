@@ -21,13 +21,13 @@ return [
 			],
 		],
 		[
-			'label' => ['admin', 'active'],
+			'label' => ['admin', 'content'],
 			'icon' => 'square-o',
-			'module' => 'active',
+			'module' => 'content',
 			'items' => [
 				[
-					'label' => ['active/type', 'title'],
-					'url' => 'active',
+					'label' => ['admin/content', 'title'],
+					'url' => 'admin/content',
 				],
 			],
 		],

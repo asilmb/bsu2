@@ -28,7 +28,7 @@ return [
 			'rules' => [
 				''=> 'dashboard',
 				
-				
+				['class' => 'yii\rest\UrlRule', 'controller' => ['content' => 'content/page']],
 				// ----------------- Active module -----------------
 				
 				['class' => 'yii\rest\UrlRule', 'controller' => ['active' => 'active/type']],

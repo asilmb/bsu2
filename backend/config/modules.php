@@ -32,8 +32,8 @@ return [
 			'class' => 'backend\modules\app\Module',
 			'as access' => $access,
 		],
-		'active' => [
-			'class' => 'backend\modules\active\Module',
+		'content' => [
+			'class' => 'backend\modules\content\Module',
 			'as access' => $access,
 		],
 		'rbac' => [
