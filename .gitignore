@@ -37,4 +37,4 @@ phpunit.phar
 .idea/
 
 # vagrant runtime
-*/node_modules
+/**/*/node_modules
