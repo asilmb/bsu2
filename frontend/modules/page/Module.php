@@ -1,13 +1,12 @@
 <?php
 
-namespace frontend\modules\welcome;
+namespace frontend\modules\page;
 
 use yii\base\Module as YiiModule;
 
 /**
  * welcome module definition class
  */
-class Module extends YiiModule
-{
-	
+class Module extends YiiModule {
+
 }

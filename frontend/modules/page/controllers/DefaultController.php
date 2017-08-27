@@ -2,9 +2,9 @@
 
 namespace frontend\modules\balhash\controllers;
 
-use yii\web\Controller;
+use frontend\modules\balhash\contrebution\BalhashController;
 
-class DefaultController extends Controller {
+class DefaultController extends BalhashController {
 	
 	public function actionIndex() {
 		return $this->render('index');

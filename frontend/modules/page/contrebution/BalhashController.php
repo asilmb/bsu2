@@ -9,8 +9,6 @@ class BalhashController extends Controller {
 	
 	public function beforeAction($action) {
 		
-		//$this->layout = 'main';
-		
 		return parent::beforeAction($action);
 		
 	}

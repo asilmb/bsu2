@@ -9,9 +9,9 @@ AppAsset::register($this);
     <div class="wrap">
 		<?= Page::snippet('header') ?>
 		<?= Page::snippet('navbar') ?>
-        <div class="container">
+        
 			<?= $content ?>
-        </div>
+       
     </div>
 
     <footer class="footer">
