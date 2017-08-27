@@ -3,55 +3,81 @@
 namespace api\v4\tests\functional\user;
 
 use api\tests\FunctionalTester;
+use api\v4\tests\functional\enums\UserEnum;
+use common\fixtures\NotifyFixture;
 use yii2lab\test\RestCest;
 use Codeception\Util\HttpCode;
+use yii2lab\test\Util\Type;
 use common\fixtures\UserRegistrationFixture;
 
 class RegistrationCest extends RestCest
 {
-	
-	public $format = [
-		'token' => 'string',
-	];
-	public $login = '77968422586';
-	public $uri = 'registration';
-	
-	public function _fixtures() {
-		return [
+
+	const URI_CREATE_ACCOUNT = 'registration/create-account';
+	const URI_ACTIVATE_ACCOUNT = 'registration/activate-account';
+	const URI_SET_PASSWORD = 'registration/set-password';
+
+	public function fixtures() {
+		$this->unloadFixtures([
+			NotifyFixture::className(),
 			UserRegistrationFixture::className(),
-		];
+		]);
 	}
 	
-	public function createAccountSuccess(FunctionalTester $I)
+	public function createTempUser(FunctionalTester $I)
 	{
 		$data = [
-			'login' => $this->login,
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
 		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponseCodeIs(HttpCode::CREATED);
-		
-		$data = [
-			'login' => '77021112233',
-			'email' => 'example@ya.ru',
-		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponseCodeIs(HttpCode::CREATED);
-		
-		$data = [
-			'login' => 'B77021112233',
-			'email' => 'example@ya.ru',
-		];
-		$I->sendPOST($this->uri . '/create-account', $data);
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
 		$I->seeResponseCodeIs(HttpCode::CREATED);
 	}
 	
-	public function createAccountFailInvalidLogin(FunctionalTester $I)
+	public function createExistedTempUser(FunctionalTester $I)
 	{
 		$data = [
-			'login' => 'tt',
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
 		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
+			[
+				"field" => "login",
+				"message" => "user_already_exists_but_not_activation"
+			],
+		]);
+	}
+
+	public function createExistedTpsUser(FunctionalTester $I)
+	{
+		$data = [
+			'login' => UserEnum::EXISTED_TPS_LOGIN,
+		];
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
+			[
+				"field" => "login",
+				"message" => "user_already_exists_and_activated"
+			],
+		]);
+	}
+
+	public function createBeeline(FunctionalTester $I)
+	{
+		$data = [
+			'login' => UserEnum::NOT_EXISTED_BEELINE_LOGIN,
+			'email' => UserEnum::EMAIL,
+		];
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeResponseCodeIs(HttpCode::CREATED);
+	}
+
+	public function createShotLogin(FunctionalTester $I)
+	{
+		$data = [
+			'login' => UserEnum::SMALL_LOGIN,
+		];
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "login",
 				"message" => "login_not_valid"
@@ -59,13 +85,13 @@ class RegistrationCest extends RestCest
 		]);
 	}
 	
-	public function createAccountFailLowLengthLogin(FunctionalTester $I)
+	public function createBigLogin(FunctionalTester $I)
 	{
 		$data = [
-			'login' => '7702444556',
+			'login' => UserEnum::BIG_LOGIN,
 		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "login",
 				"message" => "login_not_valid"
@@ -73,13 +99,13 @@ class RegistrationCest extends RestCest
 		]);
 	}
 	
-	public function createAccountFailHightLengthLogin(FunctionalTester $I)
+	public function createBadPrefix(FunctionalTester $I)
 	{
 		$data = [
-			'login' => '770244455669',
+			'login' => 'RX' . UserEnum::NOT_EXISTED_LOGIN,
 		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "login",
 				"message" => "login_not_valid"
@@ -87,161 +113,100 @@ class RegistrationCest extends RestCest
 		]);
 	}
 	
-	public function createAccountFailNotFoundPrefix(FunctionalTester $I)
+	public function createInvalidEmail(FunctionalTester $I)
 	{
 		$data = [
-			'login' => 'RX77024445566',
+			'login' => UserEnum::NOT_EXISTED_LOGIN,
+			'email' => UserEnum::NOT_VALID_EMAIL,
 		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
-			[
-				"field" => "login",
-				"message" => "login_not_valid"
-			],
-		]);
-	}
-	
-	public function createAccountFailInvalidEmail(FunctionalTester $I)
-	{
-		$data = [
-			'login' => $this->login,
-			'email' => 'exampleya.ru',
-		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "email",
-				"message" => "Email is not a valid email address."
+				"message" => "email is not a valid email address."
 			],
 		]);
 	}
-	
-	public function createAccountFailEmptyParams(FunctionalTester $I)
+
+	public function createEmptyParams(FunctionalTester $I)
 	{
 		$data = [];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "login",
-				"message" => "Login cannot be blank."
+				"message" => "login cannot be blank."
 			],
 		]);
 	}
-	
-	public function activateNewAccountSuccess(FunctionalTester $I)
+
+	/*public function createWithEmail(FunctionalTester $I)
 	{
 		$data = [
-			'login' => '77024445566',
+			'login' => UserEnum::NOT_EXISTED_LOGIN,
+			'email' => UserEnum::EMAIL,
 		];
-		$I->sendPOST($this->uri . '/create-account', $data);
-		
-		$data['activation_code'] = '123456';
-		$I->sendPOST($this->uri . '/activate-account', $data);
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
 		$I->seeResponseCodeIs(HttpCode::CREATED);
-	}
-	
-	public function activateAccountSuccess(FunctionalTester $I)
-	{
-		$data = [
-			'login' => '77026665544',
-			'activation_code' => '123456',
-		];
-		$I->sendPOST($this->uri . '/activate-account', $data);
-		$I->seeResponseCodeIs(HttpCode::CREATED);
-	}
-	
-	public function activateAccountFailEmptyParams(FunctionalTester $I)
+	}*/
+
+	public function activateEmptyParams(FunctionalTester $I)
 	{
 		$data = [];
-		$I->sendPOST($this->uri . '/activate-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_ACTIVATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "login",
-				"message" => "Login cannot be blank."
+				"message" => "login cannot be blank."
 			],
 			[
 				"field" => "activation_code",
-				"message" => "Activation Code cannot be blank."
+				"message" => "activation_code cannot be blank."
 			],
 		]);
 	}
 	
-	public function activateAccountFailInvalidActivationCode(FunctionalTester $I)
+	public function activateNotActualActivationCode(FunctionalTester $I)
 	{
 		$data = [
-			'login' => '77026665544',
-			'activation_code' => '111111',
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
+			'activation_code' => UserEnum::BAD_ACTIVATION_CODE,
 		];
-		$I->sendPOST($this->uri . '/activate-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_ACTIVATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "activation_code",
-				"message" => "activation_code_not_valid"
+				"message" => "invalid_activation_code"
 			],
 		]);
 	}
 	
-	public function activateAccountFailEmptyActivationCode(FunctionalTester $I)
+	public function activateEmptyActivationCode(FunctionalTester $I)
 	{
 		$data = [
-			'login' => '77026665544',
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
 		];
-		$I->sendPOST($this->uri . '/activate-account', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_ACTIVATE_ACCOUNT, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "activation_code",
-				"message" => "Activation Code cannot be blank."
+				"message" => "activation_code cannot be blank."
 			],
 		]);
 	}
-	
-	public function setPasswordSuccess(FunctionalTester $I)
-	{
-		$data = [
-			'login' => '77026665544',
-			'activation_code' => '123456',
-			'password' => 'foiwenownamlmsxc',
-		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponseCodeIs(HttpCode::CREATED);
-	}
-	
-	public function setPasswordFailDouble(FunctionalTester $I)
-	{
-		$data = [
-			'login' => '77026665544',
-			'activation_code' => '123456',
-			'password' => 'foiwenownamlmsxc',
-		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponseCodeIs(HttpCode::CREATED);
-		
-		$data = [
-			'login' => '77026665544',
-			'activation_code' => '123456',
-			'password' => 'foiwenownamlmsxc',
-		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY, [
-			[
-				"field" => "login",
-				"message" => "user_not_found"
-			],
-		]);
-	}
-	
-	public function setPasswordFailEmptyAllParams(FunctionalTester $I)
+
+	public function setPasswordEmptyParams(FunctionalTester $I)
 	{
 		$data = [];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_SET_PASSWORD, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "login",
-				"message" => "Login cannot be blank."
+				"message" => "login cannot be blank."
 			],
 			[
 				"field" => "activation_code",
-				"message" => "Activation Code cannot be blank."
+				"message" => "activation_code cannot be blank."
 			],
 			[
 				"field" => "password",
@@ -249,17 +214,14 @@ class RegistrationCest extends RestCest
 			],
 		]);
 	}
-	
-	public function setPasswordFailEmptyActivationCodeAndPassword(FunctionalTester $I) {
+
+	public function setPasswordEmptyPassword(FunctionalTester $I) {
 		$data = [
-			'login' => '77026665544',
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
+			'activation_code' => UserEnum::ACTIVATION_CODE,
 		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
-			[
-				"field" => "activation_code",
-				"message" => "Activation Code cannot be blank."
-			],
+		$I->sendPOST(self::URI_SET_PASSWORD, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "password",
 				"message" => "Password cannot be blank."
@@ -267,63 +229,95 @@ class RegistrationCest extends RestCest
 		]);
 	}
 	
-	public function setPasswordFailEmptyPassword(FunctionalTester $I) {
+	public function setPasswordEmptyActivationCode(FunctionalTester $I) {
 		$data = [
-			'login' => '77026665544',
-			'activation_code' => '123456',
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
+			'password' => UserEnum::PASSWORD,
 		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
-			[
-				"field" => "password",
-				"message" => "Password cannot be blank."
-			],
-		]);
-	}
-	
-	public function setPasswordFailEmptyActivationCode(FunctionalTester $I) {
-		$data = [
-			'login' => '77026665544',
-			'password' => 'foiwenownamlmsxc',
-		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_SET_PASSWORD, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "activation_code",
-				"message" => "Activation Code cannot be blank."
+				"message" => "activation_code cannot be blank."
 			],
 		]);
 	}
-	
-	public function setPasswordFailInvalidPassword(FunctionalTester $I) {
-		$data = [
-			'login' => '77026665544',
-			'activation_code' => '123456',
-			'password' => 'foiw',
-		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
-			[
-				"field" => "password",
-				"message" => "Password should contain at least 6 characters."
-			],
-		]);
-	}
-	
-	public function setPasswordFailInvalidActivationCode(FunctionalTester $I)
+
+	public function setPasswordInvalidActivationCode(FunctionalTester $I)
 	{
 		$data = [
-			'login' => '77026665544',
-			'activation_code' => '111111',
-			'password' => 'foiwenownamlmsxc',
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
+			'activation_code' => UserEnum::BAD_ACTIVATION_CODE,
+			'password' => UserEnum::PASSWORD,
 		];
-		$I->sendPOST($this->uri . '/set-password', $data);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI_SET_PASSWORD, $data);
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "activation_code",
-				"message" => "activation_code_not_valid"
+				"message" => "invalid_activation_code"
 			],
 		]);
 	}
-	
+
+	public function setPasswordInvalidPassword(FunctionalTester $I) {
+		$data = [
+			'login' => UserEnum::EXISTED_TEMP_LOGIN,
+			'activation_code' => UserEnum::ACTIVATION_CODE,
+			'password' => UserEnum::SMALL_PASSWORD,
+		];
+		$I->sendPOST(self::URI_SET_PASSWORD, $data);
+		$I->seeUnprocessableEntity([
+			[
+				"field" => "password",
+				"message" => "Password should contain at least 8 characters."
+			],
+		]);
+	}
+
+	public function create(FunctionalTester $I)
+	{
+		$data = [
+			'login' => UserEnum::NOT_EXISTED_LOGIN,
+		];
+		$I->sendPOST(self::URI_CREATE_ACCOUNT, $data);
+		$I->seeResponseCodeIs(HttpCode::CREATED);
+	}
+
+	public function activate(FunctionalTester $I)
+	{
+		$data = [
+			'login' => UserEnum::NOT_EXISTED_LOGIN,
+			'activation_code' => UserEnum::ACTIVATION_CODE,
+		];
+		$I->sendPOST(self::URI_ACTIVATE_ACCOUNT, $data);
+		$I->seeResponseCodeIs(HttpCode::CREATED);
+	}
+
+	public function setPassword(FunctionalTester $I)
+	{
+		$data = [
+			'login' => UserEnum::NOT_EXISTED_LOGIN,
+			'activation_code' => UserEnum::ACTIVATION_CODE,
+			'password' => UserEnum::PASSWORD,
+		];
+		$I->sendPOST(self::URI_SET_PASSWORD, $data);
+		$I->seeResponseCodeIs(HttpCode::CREATED);
+	}
+
+	public function setPasswordRepeat(FunctionalTester $I)
+	{
+		$data = [
+			'login' => UserEnum::NOT_EXISTED_LOGIN,
+			'activation_code' => UserEnum::ACTIVATION_CODE,
+			'password' => UserEnum::PASSWORD,
+		];
+		$I->sendPOST(self::URI_SET_PASSWORD, $data);
+		$I->seeUnprocessableEntity([
+			[
+				"field" => "login",
+				"message" => "temp_user_not_found"
+			],
+		]);
+	}
+
 }

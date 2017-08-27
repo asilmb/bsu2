@@ -11,6 +11,9 @@ use yii\web\NotFoundHttpException;
  */
 class Module extends YiiModule
 {
+	
+	public static $langDir = 'api/v4/modules/user/messages';
+	
 	public function beforeAction($action)
 	{
 		$controller = $action->controller->id;

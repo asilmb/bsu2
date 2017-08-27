@@ -1,0 +1,68 @@
+description: "Платежи"
+/check:
+    post:
+        securedBy: [TPSAuth]
+        description: "Проверка валидности данных"
+        is: !include /is/post200.raml
+        body:
+            application/json:
+                example: !include example/check.json
+        responses:
+            200:
+                description: "Вадидация прошла успешно"
+                body:
+                    application/json:
+                        #type: !include schema/access-token.json
+                        example: !include example/check-response.json
+/pay:
+    post:
+        securedBy: [TPSAuth]
+        description: "Оплата с кошелька"
+        is: !include /is/post.raml
+        body:
+            application/json:
+                example: !include example/pay.json
+/pay-from-card:
+    post:
+        securedBy: [TPSAuth]
+        description: "Оплата с карты"
+        is: !include /is/post.raml
+        body:
+            application/json:
+                example: !include example/pay-from-card.json
+        responses:
+                201:
+                    description: "Оплата прошла успешно"
+                    body:
+                        application/json:
+                            #type: !include schema/access-token.json
+                            example: !include example/pay-from-card-response.json
+/debt:
+    post:
+        securedBy: [TPSAuth]
+        description: "Получение задолженности"
+        is: !include /is/post200.raml
+        body:
+            application/json:
+                example: !include example/debt.json
+        responses:
+                200:
+                    description: "Оплата прошла успешно"
+                    body:
+                        application/json:
+                            #type: !include schema/access-token.json
+                            example: !include example/debt-response.json
+/commission:
+    post:
+        securedBy: [TPSAuth]
+        description: "Получение комиссии"
+        is: !include /is/post200.raml
+        body:
+            application/json:
+                example: !include example/commission.json
+        responses:
+                200:
+                    description: "Комиссия успешно вычилена"
+                    body:
+                        application/json:
+                            example: !include example/commission-response.json

@@ -75,6 +75,10 @@ return [
             'service.category.manage',
             'service.service.manage',
             'user.profile.*',
+            'active.field.manage',
+            'active.type.manage',
+            'geo.region.manage',
+            'notify.transport.manage',
         ],
     ],
     'rNalInsp' => [
@@ -344,7 +348,16 @@ return [
     'user.profile.*' => [
         'type' => 2,
     ],
-    'app.cache.*' => [
+    'active.field.manage' => [
+        'type' => 2,
+    ],
+    'active.type.manage' => [
+        'type' => 2,
+    ],
+    'geo.region.manage' => [
+        'type' => 2,
+    ],
+    'notify.transport.manage' => [
         'type' => 2,
     ],
 ];

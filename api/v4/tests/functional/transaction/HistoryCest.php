@@ -1,77 +1,149 @@
 <?php
 
-namespace api\v4\tests\functional\geo;
+namespace api\v4\tests\functional\transaction;
 
 use api\tests\FunctionalTester;
+use api\v4\tests\functional\enums\AccountEnum;
 use yii2lab\test\RestCest;
 use Codeception\Util\HttpCode;
+use yii2lab\test\Util\Type;
 use yii2woop\tps\components\RBACRoles;
+use yii2lab\test\Util\HttpHeader;
 
 class HistoryCest extends RestCest
 {
 	
+	const URI_EXISTS_ITEM = 'history/50010329';
+	const URI_NOT_EXISTS_ITEM = 'history/11111111';
+	
 	public $format = [
-		'id' => 'integer',
-		'amount' => 'float|integer',
-		'status' => 'integer',
-		'description' => 'string|null',
-		'type' => 'integer',
-		'service_name' => 'string|null',
-		'paymentAccount' => 'string|null',
-		'direction' => 'integer',
-		'serviceId' => 'integer',
-		'picture_url' => 'string|null',
-		'externalId' => 'string|null',
-		//'service_logo' => 'string|null',
-		'dateOper' => self::TYPE_DATE,
-		'dateDone' => self::TYPE_DATE,
-		'dateModify' => self::TYPE_DATE,
-		'reqStat' => 'string',
-		'receipt' => 'array',
-		'billingInfo' => 'array|null',
+		'id' => Type::INTEGER,
+		'amount' => Type::FLOAT,
+		'status' => Type::INTEGER,
+		'description' => Type::STRING_OR_NULL,
+		'type' => Type::INTEGER,
+		'title' => Type::STRING_OR_NULL,
+		'paymentAccount' => Type::STRING_OR_NULL,
+		'direction' => Type::INTEGER,
+		'serviceId' => Type::INTEGER,
+		'picture_url' => Type::STRING_OR_NULL,
+		'externalId' => Type::STRING_OR_NULL,
+		//'service_logo' => Type::STRING_OR_NULL,
+		'dateOper' => Type::DATE,
+		'dateDone' => Type::DATE,
+		'dateModify' => Type::DATE,
+		'reqStat' => Type::STRING,
+		'receipt' => Type::ARR_OR_NULL,
+		'billingInfo' => Type::ARR_OR_NULL,
 	];
 	public $formatExtra = [
 		'receipt' => [
-			'subjectFrom' => 'string',
-			'subjectTo' => 'string',
+			'subjectFrom' => Type::STRING,
+			'subjectTo' => Type::STRING,
 		],
 		'billingInfo' => [
 			'fields' => [
-				'amount' => 'integer|null',
-				'txn_id' => 'string',
-				'service_id' => 'integer',
-				'account' => 'string',
+				'amount' => Type::INTEGER_OR_NULL,
+				'txn_id' => Type::STRING,
+				'service_id' => Type::INTEGER,
+				'account' => Type::STRING,
 			],
 		],
 	];
 	public $uri = 'history';
-	public $login = '77026142577';
 
 	public function getList(FunctionalTester $I)
 	{
-		$I->auth($this->login);
+		$I->auth(AccountEnum::USER_3);
 		$I->sendGET($this->uri);
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+	}
+
+	public function getFilterByDate(FunctionalTester $I) {
+		$I->auth(AccountEnum::USER_2);
+		$params = [
+			'done' => ['from' => '2017-07-23', 'to' => '2017-07-24'],
+		];
+		$I->sendGET($this->uri, $params);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+
+		$I->seeHttpHeader(HttpHeader::CURRENT_PAGE, 1);
+		$I->seeHttpHeader(HttpHeader::PER_PAGE, 10);
+	}
+
+	public function getFilterByOperationTypeId(FunctionalTester $I) {
+		$I->auth(AccountEnum::USER_2);
+		$params = [
+			'done' => ['from' => '2017-07-23', 'to' => '2017-07-24'],
+			'operationTypeId' => 203,
+		];
+		$I->sendGET($this->uri, $params);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+
+		$I->seeHttpHeader(HttpHeader::CURRENT_PAGE, 1);
+		$I->seeHttpHeader(HttpHeader::PER_PAGE, 10);
+	}
+
+	public function getFilterByOperationStatus(FunctionalTester $I) {
+		$I->auth(AccountEnum::USER_2);
+		$params = [
+			'date' => ['from' => '2017-04-26', 'to' => '2017-04-27'],
+			'operationTypeId' => 203,
+			'operationStatus' => 14,
+		];
+		$I->sendGET($this->uri, $params);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+
+//		$I->seeHttpHeader(HttpHeader::TOTAL_COUNT, 22);
+		//$I->seeHttpHeader(HttpHeader::PAGE_COUNT, 2);
+		$I->seeHttpHeader(HttpHeader::CURRENT_PAGE, 1);
+		$I->seeHttpHeader(HttpHeader::PER_PAGE, 10);
+		//$I->seeListCount(10);
+	}
+	
+	public function getFilterByServicesId(FunctionalTester $I) {
+		$I->auth(AccountEnum::USER_2);
+		$params = [
+			'date' => ['from' => '2017-05-26', 'to' => '2017-05-28'],
+			'serviceId' => array(1393),
+		];
+		$I->sendGET($this->uri, $params);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+		
+		$I->seeHttpHeader(HttpHeader::TOTAL_COUNT, 1);
+		//$I->seeHttpHeader(HttpHeader::PAGE_COUNT, 2);
+		$I->seeHttpHeader(HttpHeader::CURRENT_PAGE, 1);
+		$I->seeHttpHeader(HttpHeader::PER_PAGE, 10);
+		//$I->seeListCount(10);
+		$I->seeContainValues([
+			'serviceId' => 1393,
+		]);
 	}
 	
 	public function getDetails(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendGET($this->uri . '/50010329');
-		$I->seeResponse(HttpCode::OK);
+		$I->auth(AccountEnum::USER_3);
+		$I->sendGET(self::URI_EXISTS_ITEM);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 		$I->seeResponseMatchesJsonType($this->formatExtra);
 	}
 	
 	public function getDetailsNotExists(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendGET($this->uri . '/11111111');
-		$I->seeResponse(HttpCode::NOT_FOUND);
+		$I->auth(AccountEnum::USER_3);
+		$I->sendGET(self::URI_NOT_EXISTS_ITEM);
+		$I->SeeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	
 	public function getDetailsNotAllowed(FunctionalTester $I) {
-		$I->auth('77783177384');
-		$I->sendGET($this->uri . '/50010329');
+		$I->auth(AccountEnum::USER_1);
+		$I->sendGET(self::URI_EXISTS_ITEM);
 		$I->seeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	

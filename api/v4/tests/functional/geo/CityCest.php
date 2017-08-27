@@ -5,6 +5,7 @@ namespace api\v4\tests\functional\geo;
 use api\tests\FunctionalTester;
 use yii2lab\test\RestCest;
 use Codeception\Util\HttpCode;
+use yii2lab\test\Util\Type;
 use yii2woop\tps\components\RBACRoles;
 use common\fixtures\CityFixture;
 use common\fixtures\CountryFixture;
@@ -13,27 +14,28 @@ class CityCest extends RestCest
 {
 	
 	public $format = [
-		'id' => 'integer',
-		'id_country' => 'integer',
-		'region_id' => 'integer',
-		'city_name' => 'string',
-		'position' => 'integer',
-		'status' => 'integer',
-		'date_change' => self::TYPE_DATE,
+		'id' => Type::INTEGER,
+		'id_country' => Type::INTEGER,
+		'region_id' => Type::INTEGER,
+		'city_name' => Type::STRING,
+		'position' => Type::INTEGER,
+		'status' => Type::INTEGER,
+		'date_change' => Type::DATE,
 	];
 	public $uri = 'city';
 
-	public function _fixtures() {
-		return [
+	public function fixtures() {
+		$this->loadFixtures([
 			CountryFixture::className(),
 			CityFixture::className(),
-		];
+		]);
 	}
 
 	public function getList(FunctionalTester $I)
 	{
 		$I->sendGET($this->uri);
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 	
 	public function getListWithRelations(FunctionalTester $I)
@@ -49,13 +51,14 @@ class CityCest extends RestCest
 	public function getDetails(FunctionalTester $I)
 	{
 		$I->sendGET($this->uri . '/1');
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 	
 	public function getDetailsNotExists(FunctionalTester $I)
 	{
 		$I->sendGET($this->uri . '/11111111');
-		$I->seeResponse(HttpCode::NOT_FOUND);
+		$I->SeeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	
 	public function createSuccess(FunctionalTester $I) {
@@ -69,7 +72,7 @@ class CityCest extends RestCest
 			'status' => '1',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::CREATED);
+		$I->SeeResponseCodeIs(HttpCode::CREATED);
 	}
 	
 	public function createExisted(FunctionalTester $I) {
@@ -84,10 +87,10 @@ class CityCest extends RestCest
 			'status' => '0',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "city_name",
-				"message" => 'City Name "Темиртау" has already been taken.'
+				"message" => 'already_exists Темиртау'
 			],
 		]);
 		
@@ -101,10 +104,10 @@ class CityCest extends RestCest
 			'status' => '0',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "id",
-				"message" => 'Id "1" has already been taken.'
+				"message" => 'already_exists 1'
 			],
 		]);
 	}
@@ -112,13 +115,13 @@ class CityCest extends RestCest
 	public function createFail(FunctionalTester $I) {
 		$I->authAsRole(RBACRoles::ADMINISTRATOR);
 		$body = [
-			'region_id' => '1',
-			'city_name' => 'Москва',
+			'region_id' => '123',
+			'city_name' => 'Moscow',
 			'position' => '102',
 			'status' => '1',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "id",
 				"message" => 'Id cannot be blank.'
@@ -141,10 +144,10 @@ class CityCest extends RestCest
 			'status' => '0',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "id_country",
-				"message" => 'Id Country is invalid.'
+				"message" => 'not_found'
 			],
 		]);
 	}
@@ -158,10 +161,11 @@ class CityCest extends RestCest
 		];
 		
 		$I->sendPUT($this->uri . '/1', $body);
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::NO_CONTENT);
+		/*$I->seeResponseMatchesJsonType($this->format);
 		$I->seeResponseContainsJson([
 			'city_name' => 'Киев',
-		]);
+		]);*/
 		
 		// check Login Updated User
 		//$this->checkAuth($authData);

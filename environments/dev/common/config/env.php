@@ -1,14 +1,15 @@
 <?php
 
-$domen = 'wooppay.yii';
+$domain = 'wooppay.yii';
 
 return [
 	'YII_DEBUG' => true,
 	'YII_ENV' => 'dev',
 	'url' => [
-		'frontend' => 'http://' . $domen . '/',
-		'backend' => 'http://admin.' . $domen . '/',
-		'api' => 'http://api.' . $domen . '/',
+		'frontend' => 'http://' . $domain . '/',
+		'backend' => 'http://admin.' . $domain . '/',
+		'api' => 'http://api.' . $domain . '/',
+		'static' => 'http://' . $domain . '/',
 	],
 	'cookieValidationKey' => [
 		'frontend' => '_FRONTEND_COOKIE_VALIDATION_KEY_PLACEHOLDER_',
@@ -21,11 +22,12 @@ return [
 			'username' => 'logging',
 			'password' => 'moneylogger',
 			'dbname' => 'wooppay',
-			'defaultSchema' => 'woopdb',
+			'defaultSchema' => 'salempay',
 		],
 		'test' => [
+			'driver' => 'mysql',
 			'host' => 'localhost',
-			'username' => 'postgres',
+			'username' => 'root',
 			'password' => '',
 			'dbname' => 'wooppay_test',
 		],
@@ -34,5 +36,18 @@ return [
 		'tps' => [
 			'webPath' => 'http://tps:8080/',
 		],
+	],
+	'config' => [
+		'map' => [
+			[
+				'name' => 'services',
+				'merge' => true,
+				'withLocal' => true,
+				'onlyApps' => ['common'],
+			],
+		],
+	],
+	'custom' => [
+		'isTpsDriver' => true,
 	],
 ];

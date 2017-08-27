@@ -22,16 +22,21 @@ use common\ddd\BaseEntity;
  * @author Carsten Brandt <mail@cebe.cc>
  * @since 2.0
  */
-interface CrudQueryInterface
-{
-
-    public function all();
-    public function one();
+interface CrudQueryInterface {
+	
+	public function all();
+	
+	public function one();
+	
 	public function delete(BaseEntity $entity);
+	
 	public function save(BaseEntity $entity);
+	
 	//public function update(BaseEntity $entity);
 	public function findAll($condition);
+	
 	public function findOne($condition);
+	
 	public function where($condition);
 	//public function andWhere($condition);
 	//public function orWhere($condition);
@@ -40,5 +45,5 @@ interface CrudQueryInterface
 	//public function orFilterWhere(array $condition);
 	//public function getPrimaryKey($asArray = false);
 	//public function primaryKey();
-
+	
 }

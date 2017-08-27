@@ -5,6 +5,7 @@ namespace api\v4\tests\functional\geo;
 use api\tests\FunctionalTester;
 use yii2lab\test\RestCest;
 use Codeception\Util\HttpCode;
+use yii2lab\test\Util\Type;
 use yii2woop\tps\components\RBACRoles;
 use common\fixtures\CurrencyFixture;
 
@@ -12,35 +13,37 @@ class CurrencyCest extends RestCest
 {
 	
 	public $format = [
-		'code' => 'integer',
-		'symb_def' => 'string',
-		'name_cur' => 'string',
-		'descr' => 'string',
+		'code' => Type::INTEGER,
+		'symb_def' => Type::STRING,
+		'name_cur' => Type::STRING,
+		'descr' => Type::STRING,
 	];
 	public $uri = 'currency';
 
-	public function _fixtures() {
-		return [
+	public function fixtures() {
+		$this->loadFixtures([
 			CurrencyFixture::className(),
-		];
+		]);
 	}
 
 	public function getList(FunctionalTester $I)
 	{
 		$I->sendGET($this->uri);
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 
 	public function getDetails(FunctionalTester $I)
 	{
 		$I->sendGET($this->uri . '/1');
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 
 	public function getDetailsNotExists(FunctionalTester $I)
 	{
 		$I->sendGET($this->uri . '/11111111');
-		$I->seeResponse(HttpCode::NOT_FOUND);
+		$I->SeeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	
 	public function createSuccess(FunctionalTester $I) {
@@ -52,7 +55,7 @@ class CurrencyCest extends RestCest
 			'descr' => 'Валюта Америки',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::CREATED);
+		$I->SeeResponseCodeIs(HttpCode::CREATED);
 	}
 	
 	public function createExisted(FunctionalTester $I) {
@@ -65,10 +68,10 @@ class CurrencyCest extends RestCest
 			'descr' => 'Валюта Республики Казахстан1',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "symb_def",
-				"message" => 'Symb Def "KZT" has already been taken.'
+				"message" => 'already_exists KZT'
 			],
 		]);
 		
@@ -80,10 +83,10 @@ class CurrencyCest extends RestCest
 			'descr' => 'Валюта Республики Казахстан1',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "code",
-				"message" => 'Code "1" has already been taken.'
+				"message" => 'already_exists 1'
 			],
 		]);
 	}
@@ -91,11 +94,11 @@ class CurrencyCest extends RestCest
 	public function createFail(FunctionalTester $I) {
 		$I->authAsRole(RBACRoles::ADMINISTRATOR);
 		$body = [
-			'code' => '3',
-			'symb_def' => 'USD',
+			'code' => '345',
+			'symb_def' => 'BYR',
 		];
 		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->seeUnprocessableEntity([
 			[
 				"field" => "name_cur",
 				"message" => 'Name Cur cannot be blank.'
@@ -111,10 +114,11 @@ class CurrencyCest extends RestCest
 		];
 		
 		$I->sendPUT($this->uri . '/1', $body);
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::NO_CONTENT);
+		/*$I->seeResponseMatchesJsonType($this->format);
 		$I->seeResponseContainsJson([
 			'name_cur' => 'Казахстанский тенге 1',
-		]);
+		]);*/
 		
 		// check Login Updated User
 		//$this->checkAuth($authData);

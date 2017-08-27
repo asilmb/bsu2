@@ -1,0 +1,8 @@
+{
+  "service_id": 2,
+  "card_id": 123,
+  "fields": {
+    "amount": 9,
+    "account": "7055556699",
+  }
+}

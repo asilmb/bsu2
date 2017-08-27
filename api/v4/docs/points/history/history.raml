@@ -23,9 +23,54 @@ get:
             * 1: outgoing
             * 2: external
         is: !include /is/get-details.raml
+        #queryParameters:
+            #perrrrrr:
+                #type: integer
+                #description: Установить количество записей на странице
+                #required: false
+                #default: 20
+                #minimum: 10
+                #maximum: 999999
         responses:
             200:
                 body:
                     application/json:
                         #type: !include schema/details.json
                         example: !include example/details.json
+
+
+/get-operation-types:
+    get:
+            description: |
+                Возвращает список всех значений параметра operationTypeId
+
+            is: !include /is/get-details.raml
+            responses:
+                200:
+                    body:
+                        application/json:
+                            example: !include example/operation-types.json
+
+/get-states:
+    get:
+            description: |
+                Возвращает список всех значений параметра status
+
+            is: !include /is/get-details.raml
+            responses:
+                200:
+                    body:
+                        application/json:
+                            example: !include example/operation-states.json
+
+/get-categories-list:
+    get:
+            description: |
+                Возвращает структурированный список всех имеющихся в системе категорий
+
+            is: !include /is/get-categories-list.raml
+            responses:
+                200:
+                    body:
+                        application/json:
+                            example: !include example/get-categories-list.json

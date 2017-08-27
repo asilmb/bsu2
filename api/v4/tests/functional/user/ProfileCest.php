@@ -3,49 +3,122 @@
 namespace api\v4\tests\functional\user;
 
 use api\tests\FunctionalTester;
+use api\v4\tests\functional\enums\AccountEnum;
+use api\v4\tests\functional\enums\UserEnum;
+use common\fixtures\UserProfileFixture;
 use yii2lab\test\RestCest;
 use Codeception\Util\HttpCode;
+use yii2lab\test\Util\Type;
 use yii2woop\tps\components\RBACRoles;
 
 class ProfileCest extends RestCest
 {
+	const URI = 'profile';
+	
+	const PROFILE_FIRST_NAME = 'NewFirstName';
+	const PROFILE_LAST_NAME = 'NewLastName';
+	const PROFILE_SEX = 0;
+	const PROFILE_BIRTH_DATE = '1989-02-19T10:42:46Z';
+	const PROFILE_CITY = 77;
+	const PROFILE_COUNTRY = 34;
+	
 	public $format = [
-		'id' => 'integer',
-		'parent_id' => 'integer|null',
-		'name' => 'string',
-		'subject_type' => 'integer',
-		'creation_date' => self::TYPE_DATE,
-		'sex' => 'boolean',
-		'birth_date' => self::TYPE_DATE,
-		'city' => 'integer',
-		'country' => 'integer',
-		'email' => 'string',
-		//'iin_fixed' => '',
-		'balance' => 'array|null',
-		'roles' => 'array',
+		'first_name' => Type::STRING_OR_NULL,
+		'last_name' => Type::STRING_OR_NULL,
+		'birth_date' => Type::DATE,
+		'iin' => Type::STRING_OR_NULL,
+		'sex' => Type::BOOLEAN_OR_NULL,
 	];
-	public $login = '77783177384';
-	public $uri = 'profile';
+	
+	public function fixtures() {
+		$this->loadFixtures([
+			UserProfileFixture::className(),
+		]);
+	}
+
+	public function checkPermission(FunctionalTester $I)
+	{
+		$data = [];
+		$I->sendPUT(self::URI, $data);
+		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
+	}
+	
+	public function changeInfo(FunctionalTester $I)
+	{
+		$I->auth(UserEnum::EXISTED_LOGIN);
+		$data = [
+			"first_name" => self::PROFILE_FIRST_NAME,
+			"last_name" => self::PROFILE_LAST_NAME,
+			"sex" => self::PROFILE_SEX,
+		    "birth_date" => self::PROFILE_BIRTH_DATE,
+		    "city_id" => self::PROFILE_CITY,
+		    "country_id" => self::PROFILE_COUNTRY,
+		];
+		$I->sendPUT(self::URI, $data);
+		$I->seeResponseCodeIs(HttpCode::NO_CONTENT);
+	}
+	
+	public function getInfo(FunctionalTester $I)
+	{
+		$I->auth(UserEnum::EXISTED_LOGIN);
+		$I->sendGET(self::URI);
+		$I->seeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+	}
+	
+	/*public function changeInfoBadData(FunctionalTester $I)
+	{
+		$I->auth(UserEnum::EXISTED_LOGIN);
+		$data = [
+			"name" => "NewName",
+			"sex" => 'uuu',
+			"birth_date" => "uuu",
+			"city_id" => 'ttt',
+			"country_id" => 'yyy',
+		];
+		$I->sendPUT(self::URI, $data);
+		$I->seeUnprocessableEntity([
+			[
+				"field" => "birth_date",
+				"message" => "The format of Birth Date is invalid."
+			],
+			[
+				"field" => "sex",
+				"message" => "Sex must be either \"1\" or \"0\"."
+			],
+			
+			[
+				"field" => "city_id",
+				"message" => "City Id must be an integer."
+			],
+			[
+				"field" => "country_id",
+				"message" => "Country Id must be an integer."
+			],
+		]);
+	}
 	
 	public function detailSuccess(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendGET($this->uri . '/381069');
-		$I->seeResponse(HttpCode::OK);
+		$I->auth(UserEnum::EXISTED_LOGIN);
+		$I->sendGET(self::URI . '/381069');
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 	
 	public function detailSuccessByLogin(FunctionalTester $I)
 	{
 		$I->auth($this->login);
-		$I->sendGET($this->uri . '/77783177384');
-		$I->seeResponse(HttpCode::OK);
+		$I->sendGET(self::URI . '/77783177384');
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 	
 	public function detailFail(FunctionalTester $I)
 	{
 		$I->auth($this->login);
-		$I->sendGET($this->uri . '/361660');
-		$I->seeResponse(HttpCode::FORBIDDEN);
+		$I->sendGET(self::URI . '/361660');
+		$I->SeeResponseCodeIs(HttpCode::FORBIDDEN);
 	}
 	
 	public function updateSuccessInfo(FunctionalTester $I)
@@ -58,10 +131,11 @@ class ProfileCest extends RestCest
 			//"id_country" => "2",
 			//"city_id" => "0"
 		];
-		$I->sendPUT($this->uri . '/381069', $data);
-		$I->seeResponse(HttpCode::OK);
+		$I->sendPUT(self::URI . '/381069', $data);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 		
-		$I->sendGET($this->uri . '/381069');
+		$I->sendGET(self::URI . '/381069');
 		$I->seeBody($data, true);
 		
 		$data = [
@@ -71,7 +145,7 @@ class ProfileCest extends RestCest
 			//"id_country" => "2",
 			//"city_id" => "0"
 		];
-		$I->sendPUT($this->uri . '/381069', $data);
+		$I->sendPUT(self::URI . '/381069', $data);
 	}
 	
 	public function updateSuccessEmail(FunctionalTester $I)
@@ -81,17 +155,18 @@ class ProfileCest extends RestCest
 			"password" => "Wwwqqq111",
 			"email" => "example@yandex.ru",
 		];
-		$I->sendPUT($this->uri . '/381069/email', $data);
-		$I->seeResponse(HttpCode::OK);
+		$I->sendPUT(self::URI . '/381069/email', $data);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 		
-		$I->sendGET($this->uri . '/381069');
+		$I->sendGET(self::URI . '/381069');
 		$I->seeBody($data, true);
 		
 		$data = [
 			"password" => "Wwwqqq111",
 			"email" => "example111@yandex.ru",
 		];
-		$I->sendPUT($this->uri . '/381069/email', $data);
+		$I->sendPUT(self::URI . '/381069/email', $data);
 	}
 
 	public function updateSuccessPassword(FunctionalTester $I)
@@ -101,51 +176,52 @@ class ProfileCest extends RestCest
 			"password" => "Wwwqqq111",
 			"new_password" => "Wwwqqq111",
 		];
-		$I->sendPUT($this->uri . '/381069/password', $data);
-		$I->seeResponse(HttpCode::OK);
+		$I->sendPUT(self::URI . '/381069/password', $data);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 	
 	public function viewFailUnauthorized(FunctionalTester $I)
 	{
-		$I->sendGET($this->uri . '/381069');
+		$I->sendGET(self::URI . '/381069');
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 	}
 	
 	public function updateFailUnauthorized(FunctionalTester $I)
 	{
-		$I->sendPUT($this->uri . '/381069', []);
+		$I->sendPUT(self::URI . '/381069', []);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 	}
 	
 	public function updateEmailFailUnauthorized(FunctionalTester $I)
 	{
-		$I->sendPUT($this->uri . '/381069/email', []);
+		$I->sendPUT(self::URI . '/381069/email', []);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 	}
 	
 	public function updatePasswordFailUnauthorized(FunctionalTester $I)
 	{
-		$I->sendPUT($this->uri . '/381069/password', []);
+		$I->sendPUT(self::URI . '/381069/password', []);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 	}
 	
 	public function createFailMethodNotAllowed(FunctionalTester $I) {
 		$I->authAsRole(RBACRoles::ADMINISTRATOR);
-		$I->sendPOST($this->uri, []);
+		$I->sendPOST(self::URI, []);
 		$I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
 	}
 	
 	public function deleteFailMethodNotAllowed(FunctionalTester $I)
 	{
 		$I->authAsRole(RBACRoles::ADMINISTRATOR);
-		$I->sendDELETE($this->uri . '/1', []);
+		$I->sendDELETE(self::URI . '/1', []);
 		$I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
 	}
 	
 	public function indexFailMethodNotAllowed(FunctionalTester $I)
 	{
 		$I->authAsRole(RBACRoles::ADMINISTRATOR);
-		$I->sendGET($this->uri);
+		$I->sendGET(self::URI);
 		$I->seeResponseCodeIs(HttpCode::METHOD_NOT_ALLOWED);
-	}
+	}*/
 }

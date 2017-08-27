@@ -2,48 +2,72 @@
 return [
 	'mainMenu' => [
 		[
-			'label' => 'application',
-			'options' => ['class' => 'header'],
+			'label' => ['admin', 'main'],
+			'isHeader' => true,
 		],
 		[
-			'name' => 'app',
-		],
-	
-		[
-			'name' => 'gii',
-			'icon' => '<i class="fa fa-flask"></i>',
-		],
-		[
-			'label' => 'modules',
-			'options' => ['class' => 'header'],
-		],
-		[
-			'name' => 'rbac',
-		],
-		[
-			'name' => 'logreader',
+			'label' => ['admin', 'app'],
+			'icon' => 'square-o',
+			'module' => 'app',
+			'items' => [
+				[
+					'label' => ['app/cache', 'title'],
+					'url' => 'app/cache',
+				],
+				[
+					'label' => ['app/lang', 'title'],
+					'url' => 'app/lang',
+				],
+			],
 		],
 		[
-			'label' => 'entity',
-			'options' => ['class' => 'header'],
+			'label' => ['admin', 'active'],
+			'icon' => 'square-o',
+			'module' => 'active',
+			'items' => [
+				[
+					'label' => ['active/type', 'title'],
+					'url' => 'active',
+				],
+			],
 		],
 		[
-			'name' => 'content',
+			'label' => ['admin', 'rbac'],
+			'icon' => 'users',
+			'module' => 'rbac',
+			'items' => [
+				[
+					'label' => ['admin', 'rbac_permission'],
+					'url' => 'rbac/permission',
+				],
+				[
+					'label' => ['admin', 'rbac_role'],
+					'url' => 'rbac/role',
+				],
+				[
+					'label' => ['admin', 'rbac_rule'],
+					'url' => 'rbac/rule',
+				],
+				[
+					'label' => ['admin', 'rbac_assignment'],
+					'url' => 'rbac/assignment',
+				],
+			],
 		],
-		/* [
-			'name' => 'rbac',
-			'icon' => '<i class="fa fa-users"></i>',
-			'label' => 'User',
-		], */
 		[
-			'name' => 'backuprestore',
-			'icon' => '<i class="fa fa-database"></i>',
-			'label' => 'Dump DB',
+			'label' => ['admin', 'logreader'],
+			'icon' => 'database',
+			'url' => 'logreader',
+			'module' => 'logreader',
 		],
-		/* [
-			'name' => 'settings',
-			'icon' => '<i class="fa fa-cog"></i>',
-			'label' => 'Settings',
-		], */
+		[
+			'label' => ['admin', 'develop'],
+			'isHeader' => true,
+		],
+		[
+			'label' => ['admin', 'gii'],
+			'icon' => 'flask',
+			'url' => 'gii',
+		],
 	],
 ];

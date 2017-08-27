@@ -1,0 +1,418 @@
+[
+  {
+    "lvl1": {
+      "id": 58,
+      "parent_id": null,
+      "title": "Wooppay",
+      "name": "wooppay_root",
+      "picture": "service_menu592bf6c0151df9.78555321.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu592bf6c0151df9.78555321.png"
+    },
+    "lvl2": [
+      {
+        "id": 11,
+        "parent_id": 58,
+        "title": "Дополнительные дворы",
+        "name": "more-services",
+        "picture": "service_menu56ebbf9c56f215.98877160.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf9c56f215.98877160.png"
+      },
+      {
+        "id": 181,
+        "parent_id": 58,
+        "title": "Бюджет и учёба",
+        "name": "budget_learning",
+        "picture": "service_menu58b92c84091966.59671244.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu58b92c84091966.59671244.png"
+      },
+      {
+        "id": 175,
+        "parent_id": 58,
+        "title": "Купоны и билеты",
+        "name": "coupons_tickets",
+        "picture": "service_menu58b92c78cd93a2.35882184.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu58b92c78cd93a2.35882184.png"
+      },
+      {
+        "id": 9,
+        "parent_id": 58,
+        "title": "Покупки",
+        "name": "shopping",
+        "picture": "service_menu56ebbf927155d5.98192330.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf927155d5.98192330.png"
+      },
+      {
+        "id": 12,
+        "parent_id": 58,
+        "title": "Переводы",
+        "name": "money-transfers",
+        "picture": "service_menu56ebbfa28746b3.29325326.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbfa28746b3.29325326.png"
+      },
+      {
+        "id": 3,
+        "parent_id": 58,
+        "title": "Регулярные платежи",
+        "name": "regular-payments",
+        "picture": "service_menu56ebbf8abc9856.23547663.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf8abc9856.23547663.png"
+      },
+      {
+        "id": 10,
+        "parent_id": 58,
+        "title": "Игры и букмекеры",
+        "name": "games-bookmakers",
+        "picture": "service_menu56ebbf98d8d857.22570839.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf98d8d857.22570839.png"
+      },
+      {
+        "id": 141,
+        "parent_id": 58,
+        "title": "Телефон",
+        "name": "phone",
+        "picture": "service_menu5840f55d726ac2.14693856.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu5840f55d726ac2.14693856.png"
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 11,
+      "parent_id": 58,
+      "title": "Дополнительные дворы",
+      "name": "more-services",
+      "picture": "service_menu56ebbf9c56f215.98877160.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf9c56f215.98877160.png"
+    },
+    "lvl2": [
+      {
+        "id": 188,
+        "parent_id": 11,
+        "title": "Другое",
+        "name": "other",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 187,
+        "parent_id": 11,
+        "title": "Домены и хостинги",
+        "name": "domens_hosting",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 186,
+        "parent_id": 11,
+        "title": "Реклама и объявления",
+        "name": "publicity",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 28,
+        "parent_id": 11,
+        "title": "Социальные сети",
+        "name": "social",
+        "picture": null,
+        "picture_url": null
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 181,
+      "parent_id": 58,
+      "title": "Бюджет и учёба",
+      "name": "budget_learning",
+      "picture": "service_menu58b92c84091966.59671244.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu58b92c84091966.59671244.png"
+    },
+    "lvl2": [
+      {
+        "id": 185,
+        "parent_id": 181,
+        "title": "Университеты",
+        "name": "universities",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 184,
+        "parent_id": 181,
+        "title": "Школы",
+        "name": "schools",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 183,
+        "parent_id": 181,
+        "title": "Детские сады",
+        "name": "Kindergartens",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 182,
+        "parent_id": 181,
+        "title": "Платежи в бюджет",
+        "name": "payments_budget",
+        "picture": null,
+        "picture_url": null
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 175,
+      "parent_id": 58,
+      "title": "Купоны и билеты",
+      "name": "coupons_tickets",
+      "picture": "service_menu58b92c78cd93a2.35882184.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu58b92c78cd93a2.35882184.png"
+    },
+    "lvl2": [
+      {
+        "id": 180,
+        "parent_id": 175,
+        "title": "Транспорт",
+        "name": "transport",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 189,
+        "parent_id": 175,
+        "title": "Кино и концерты",
+        "name": "cinema_concerts",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 177,
+        "parent_id": 175,
+        "title": "Купоны",
+        "name": "coupons",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 176,
+        "parent_id": 175,
+        "title": "Туры и путешествия",
+        "name": "tours_travels",
+        "picture": null,
+        "picture_url": null
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 9,
+      "parent_id": 58,
+      "title": "Покупки",
+      "name": "shopping",
+      "picture": "service_menu56ebbf927155d5.98192330.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf927155d5.98192330.png"
+    },
+    "lvl2": [
+      {
+        "id": 21,
+        "parent_id": 9,
+        "title": "Подключится к Wooppay",
+        "name": "connect_to_wooppay",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 20,
+        "parent_id": 9,
+        "title": "Сетевые продажи",
+        "name": "net-sales",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 18,
+        "parent_id": 9,
+        "title": "Интернет-магазины",
+        "name": "online-shopping",
+        "picture": "service_menu593a22746208b4.19130760.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu593a22746208b4.19130760.png"
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 12,
+      "parent_id": 58,
+      "title": "Переводы",
+      "name": "money-transfers",
+      "picture": "service_menu56ebbfa28746b3.29325326.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbfa28746b3.29325326.png"
+    },
+    "lvl2": [
+      {
+        "id": 138,
+        "parent_id": 12,
+        "title": "Вывод денег",
+        "name": "bank-account-transfers",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 24,
+        "parent_id": 12,
+        "title": "Кредиты",
+        "name": "loans",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 30,
+        "parent_id": 12,
+        "title": "Переводы",
+        "name": "transfers",
+        "picture": null,
+        "picture_url": null
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 188,
+      "parent_id": 11,
+      "title": "Другое",
+      "name": "other",
+      "picture": null,
+      "picture_url": null
+    },
+    "lvl2": [
+      {
+        "id": 243,
+        "parent_id": 188,
+        "title": "[^\\s]*(?!salempay)[^\\s]",
+        "name": "[^\\s]*(?!salempay)[^\\s]",
+        "picture": null,
+        "picture_url": null
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 3,
+      "parent_id": 58,
+      "title": "Регулярные платежи",
+      "name": "regular-payments",
+      "picture": "service_menu56ebbf8abc9856.23547663.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf8abc9856.23547663.png"
+    },
+    "lvl2": [
+      {
+        "id": 13,
+        "parent_id": 3,
+        "title": "Телевидение",
+        "name": "television",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 4,
+        "parent_id": 3,
+        "title": "Интернет",
+        "name": "internet",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 17,
+        "parent_id": 3,
+        "title": "Городской телефон",
+        "name": "city-phone",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 14,
+        "parent_id": 3,
+        "title": "Коммунальные услуги",
+        "name": "communal-services",
+        "picture": null,
+        "picture_url": null
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 10,
+      "parent_id": 58,
+      "title": "Игры и букмекеры",
+      "name": "games-bookmakers",
+      "picture": "service_menu56ebbf98d8d857.22570839.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu56ebbf98d8d857.22570839.png"
+    },
+    "lvl2": [
+      {
+        "id": 25,
+        "parent_id": 10,
+        "title": "Игры",
+        "name": "games",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 44,
+        "parent_id": 10,
+        "title": "Букмекеры",
+        "name": "bookmakers-and-lotteries",
+        "picture": "service_menu5926c604443a07.45488236.png",
+        "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu5926c604443a07.45488236.png"
+      }
+    ]
+  },
+  {
+    "lvl1": {
+      "id": 141,
+      "parent_id": 58,
+      "title": "Телефон",
+      "name": "phone",
+      "picture": "service_menu5840f55d726ac2.14693856.png",
+      "picture_url": "http:\/\/static.test.wooppay.com\/service_menu\/service_menu5840f55d726ac2.14693856.png"
+    },
+    "lvl2": [
+      {
+        "id": 144,
+        "parent_id": 141,
+        "title": "Зарубежные операторы",
+        "name": "foreign-operators",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 145,
+        "parent_id": 141,
+        "title": "IP телефония",
+        "name": "ip-telephony",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 143,
+        "parent_id": 141,
+        "title": "Городская связь",
+        "name": "city-phone",
+        "picture": null,
+        "picture_url": null
+      },
+      {
+        "id": 142,
+        "parent_id": 141,
+        "title": "Мобильная связь",
+        "name": "mobile",
+        "picture": null,
+        "picture_url": null
+      }
+    ]
+  }
+]

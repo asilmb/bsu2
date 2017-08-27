@@ -3,12 +3,16 @@
 return [
 	'MaintenanceMode' => false,
 	'pageSize' => 25,
-	'user.passwordResetTokenExpire' => 3600,
+	'user.passwordResetTokenExpire' => 60,
+	'user.registration.tempLoginExpire' => 20 * 60,
+	'user.auth.rememberExpire' => 3600 * 24 * 30,
+	'user.login.mask' => '+%d (%d) %d-%d-%d',
 	'url' => env('url'),
 	'dee.migration.path' => [
 		//'@yii/rbac/migrations',
 		//'@mdm/admin/migrations',
 		//'@vendor/yii2mod/yii2-settings/migrations',
+		'@vendor/yii2lab/yii2-user/src/migrations',
 		'@vendor/yii2module/yii2-rest-client/src/migrations',
 	],
 	'fixture' => [
@@ -34,7 +38,12 @@ return [
 			'lang',
 		],
 	],
-	
+	'static' => [
+		'path' => [
+			'avatar' => 'images/avatars',
+			'qr' => 'images/qr',
+		],
+	],
 	'servers' => env('servers'),
 	'MRP' => 2121,
 	'EPAY_PERCENT' => 2,

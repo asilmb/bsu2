@@ -4,7 +4,7 @@ return [
 	'bootstrap' => [],
 	'components' => [
 		'user' => [
-			'identityClass' => 'yii2lab\user\models\identity\Disc',
+			//'identityClass' => 'yii2lab\user\models\identity\Disc',
 			'enableAutoLogin' => true,
 			'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
 			'loginUrl'=>['user/auth/login'],
@@ -27,6 +27,14 @@ return [
 		'urlManager' => [
 			'rules' => [
 				''=> 'dashboard',
+				
+				
+				// ----------------- Active module -----------------
+				
+				['class' => 'yii\rest\UrlRule', 'controller' => ['active' => 'active/type']],
+				
+				'active/<action>' => 'active/type/<action>',
+
 			],
 		],
 	],

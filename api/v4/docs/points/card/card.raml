@@ -1,5 +1,6 @@
 description: "Банковские карты"
 get:
+    securedBy: [TPSAuth]
     description: "Возвращает список карт"
     is: !include /is/simple/get-list.raml
     responses:
@@ -14,6 +15,7 @@ get:
             description: "ID карты"
             type: integer
     get:
+        securedBy: [TPSAuth]
         description: "Возвращает карту"
         is: !include /is/simple/get-details.raml
         responses:
@@ -22,14 +24,34 @@ get:
                     application/json:
                         #type: !include schema/details.json
                         example: !include example/details.json
+    delete:
+        securedBy: [TPSAuth]
+        description: "Отвязать карту"
+        is: !include /is/delete.raml
+/approve:
     put:
-        description: "Привязать карту"
+        securedBy: [TPSAuth]
+        description: "Допривязать карту"
         is: !include /is/put.raml
         body:
             application/json:
                 #type: !include schema/edit.json
                 example: !include example/approve.json
-
-    delete:
-        description: "Удалить карту"
-        is: !include /is/delete.raml
+/attach:
+    get:
+        securedBy: [TPSAuth]
+        description: "Привязать карту"
+        is: [code200, code304, code404, code401, code403, code429, code500]
+        responses:
+           200:
+                body:
+                    text/html:
+                        #type: !include schema/edit.json
+                        example: !include example/attach.html
+        queryParameters:
+            link:
+                type: integer
+                description: Привязка
+                required: true
+                minimum: 1
+                example: 1

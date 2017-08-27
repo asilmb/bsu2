@@ -16,12 +16,27 @@ AppAsset::register($this);
 	<header class="main-header">
 		<?= Page::snippet('navbar') ?>
 	</header>
-	<?= Page::snippet('navMenu') ?>
+	
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="main-sidebar">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+			<!-- Sidebar user panel (optional) -->
+			<?/* = Page::snippet('userPanel') */ ?>
+			<!-- Sidebar Menu -->
+			<?= Page::snippet('sidebarMenu') ?>
+			<!-- /.sidebar-menu -->
+		</section>
+		<!-- /.sidebar -->
+	</aside>
+	
 	<div class="content-wrapper">
 		<section class="content-header">
-			<?php if(!empty(\Yii::$app->view->title)) {
-				echo '<h1>' . Html::encode(\Yii::$app->view->title) . '</h1>';
-			} ?>
+			<?php if(!empty($this->title)) { ?>
+				<h1>
+					<?= Html::encode($this->title) ?>
+				</h1>
+			<?php } ?>
 			<?= Page::snippet('breadcrumbs') ?>
 			<?= Page::snippet('alert', '@common') ?>
 		</section>
@@ -33,7 +48,7 @@ AppAsset::register($this);
 			</div>
 		</section>
 	</div>
-	<footer class="main-footer" style="padding-bottom: 40px;">
+	<footer class="main-footer" style="padding-bottom: 30px; padding-top: 10px;">
 		<?= Page::snippet('footer', '@common') ?>
 	</footer>
 </div>

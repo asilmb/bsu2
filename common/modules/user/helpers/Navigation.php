@@ -1,10 +1,10 @@
 <?php
+
 namespace common\modules\user\helpers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii2lab\helpers\yii\Html;
-use common\widgets\Menu;
-use common\widgets\DropdownMenu;
 
 class Navigation {
 	
@@ -48,9 +48,26 @@ class Navigation {
 				'encode' => false,
 			], */
 			[
+				'label' => ['account/main','my_account'],
+				'url' => 'account',
+				'module' => 'user',
+				'access' => ['@'],
+			],
+			[
+				'label' => ['account/main','my_cards'],
+				'url' => 'bank/card',
+				'module' => 'bank',
+				'access' => ['@'],
+			],
+			[
+				'label' => ['account/main','my_profile'],
+				'url' => 'user/profile',
+				'module' => 'user',
+				'access' => ['@'],
+			],
+			[
 				'label' => t('user/auth', 'logout_action') . self::getLogoutForm(),
-				//'icon' => 'icon-switch2',
-				'url' => "javascript: $('#form_logout').submit()",
+				'js' => "$('#form_logout').submit()",
 				'encode' => false,
 			],
 		];
@@ -59,37 +76,36 @@ class Navigation {
 	private static function getGuestMenu()
 	{
 		$items = [];
-		$items[] = ['label' => t('user/auth', 'login_action'), 'url' => ['/user/auth/login']];
+		$items[] = ['label' => ['user/auth', 'login_action'], 'url' => 'user/auth'];
 		if(APP == FRONTEND) {
-			$items[] = ['label' => t('user/auth', 'signup_action'), 'url' => ['/user/reg/signup']];
-			$items[] = ['label' => t('user/password', 'title'), 'url' => ['/user/password/reset-request']];
+			$items[] = ['label' => ['user/registration', 'title'], 'url' => 'user/registration'];
+			//$items[] = ['label' => ['user/password', 'title'], 'url' => 'user/password/reset-request'];
 		}
 		return [
 			'label' => 
 				Html::fa('user') . NBSP . 
 				t('user/auth', 'title'),
 			'encode' => false,
-			'items' => DropdownMenu::widget([
-				'items' => $items,
-			]),
+			'items' => $items,
 		];
 	}
 	
 	private static function getUserMenu()
 	{
-		$label = 
-			Html::fa('user') . NBSP . 
-			//'<img src="' . Yii::$app->user->getAvatarUrl(true) . '" class="user-image" alt="User Image" height="16"/>' . NBSP .
-			Yii::$app->user->getAttribute('username');
+		$balance = Yii::$app->account->auth->getBalance()->active;
+		$identity = Yii::$app->user->identity;
+		//$avatar = Html::fa('user');
+		$avatar = '<img src="'. $identity->profile->avatar_url . '" height="19" />';
+		$label =
+			$avatar . NBSP .
+			'<small>'. 
+				$identity->username . NBSP .
+				'(Баланс: <b>'. floatval($balance) . '</b>)' .
+			'</small>';
 		return [
 			'label' => $label,
-			/* 'options' => [
-				'class' => 'dropdown dropdown-user',
-			], */
 			'encode' => false,
-			'items' => DropdownMenu::widget([
-				'items' => self::getItemList(),
-			]),
+			'items' => self::getItemList(),
 		];
 	}
 	
@@ -97,9 +113,7 @@ class Navigation {
 	{
 		$url = ['/user/auth/logout'];
 		$options = ['id' => 'form_logout', 'chass' => 'hide'];
-		return 
-			Html::beginForm($url, 'post', $options) . 
-			Html::endForm();
+		return Html::beginForm($url, 'post', $options) . Html::endForm();
 	}
 	
 }

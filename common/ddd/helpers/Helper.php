@@ -32,7 +32,7 @@ class Helper {
 		$lastSlash = strrpos($class, '\\');
 		return substr($class, 0, $lastSlash);
 	}
-
+	
 	public static function toArray($value) {
 		if(is_object($value) && method_exists($value, 'toArray')) {
 			return $value->toArray();
@@ -53,9 +53,10 @@ class Helper {
 	}
 	
 	public static function dirLevelUp($class, $upLevel) {
+		$arr = explode('\\', $class);
 		for($i = 0; $i < $upLevel; $i++) {
-			$class = dirname($class);
+			$arr = array_splice($arr, 0, -1);
 		}
-		return $class;
+		return implode('\\', $arr);
 	}
 }

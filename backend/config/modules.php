@@ -32,8 +32,8 @@ return [
 			'class' => 'backend\modules\app\Module',
 			'as access' => $access,
 		],
-		'content' => [
-			'class' => 'common\modules\content\Module',
+		'active' => [
+			'class' => 'backend\modules\active\Module',
 			'as access' => $access,
 		],
 		'rbac' => [
@@ -57,6 +57,7 @@ return [
                 'Console' => '@console/runtime/logs/app.log',
 				'Api' => '@api/runtime/logs/app.log',
             ],
+			'as access' => $access,
         ],
 	],
 ];

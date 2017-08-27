@@ -63,7 +63,7 @@ class Alert extends kartikAlert
 		}
 	}
 	
-	public function add($body, $type = parent::TYPE_INFO)
+	public static function add($body, $type = parent::TYPE_INFO)
 	{
 		if(is_array($body)) {
 			$body = t($body[0], $body[1]);

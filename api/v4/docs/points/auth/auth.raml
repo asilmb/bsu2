@@ -27,3 +27,25 @@ get:
                 application/json:
                     #type: !include schema/info.json
                     example: !include example/info.json
+/restore-password:
+    /request:
+        post:
+            description: "Запрос на восстановление пароля"
+            is: !include /is/post.raml
+            body:
+                application/json:
+                    example: !include example/restore-password/request.json
+    /check-code:
+        post:
+            description: "Проверка кода активации"
+            is: !include /is/post204.raml
+            body:
+                application/json:
+                    example: !include example/restore-password/check-code.json
+    /confirm:
+        post:
+            description: "Назначение нового пароля"
+            is: !include /is/post204.raml
+            body:
+                application/json:
+                    example: !include example/restore-password/confirm.json

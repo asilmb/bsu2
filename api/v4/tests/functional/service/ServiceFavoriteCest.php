@@ -1,10 +1,16 @@
 <?php
 
-namespace api\v4\tests\functional\geo;
+namespace api\v4\tests\functional\service;
 
 use api\tests\FunctionalTester;
+use api\v4\tests\functional\enums\AccountEnum;
+use common\fixtures\ServiceFieldFixture;
+use common\fixtures\ServiceFieldValidationFixture;
+use common\fixtures\ServiceFieldValueFixture;
 use yii2lab\test\RestCest;
 use Codeception\Util\HttpCode;
+use yii2lab\test\Util\HttpHeader;
+use yii2lab\test\Util\Type;
 use yii2woop\tps\components\RBACRoles;
 use common\fixtures\ServiceFixture;
 use common\fixtures\FavoriteFixture;
@@ -12,103 +18,115 @@ use common\fixtures\FavoriteFixture;
 class ServiceFavoriteCest extends RestCest
 {
 
+	const URI = 'favorite';
+	const URI_EXISTED_ITEM = 'favorite/1';
+	const URI_NOT_EXISTED_ITEM = 'favorite/11111';
+	
 	public $format = [
-		'id' => 'integer',
-		'service_id' => 'integer',
-		'name' => 'string|null',
-		'parent_id' => 'integer|null',
-		'title' => 'string',
-		'description' => 'string|null',
-		'picture' => 'string|null',
-		'picture_url' => 'string|null',
-		'synonyms' => 'string|null',
-		'fields' => 'array|null',
+		'id' => Type::INTEGER,
+		'service_id' => Type::INTEGER,
+		'name' => Type::STRING_OR_NULL,
+		'parent_id' => Type::INTEGER_OR_NULL,
+		'title' => Type::STRING,
+		'description' => Type::STRING_OR_NULL,
+		'picture' => Type::STRING_OR_NULL,
+		'picture_url' => Type::STRING_OR_NULL,
+		'synonyms' => Type::STRING_OR_NULL,
+		'fields' => Type::ARR_OR_NULL,
 	];
-	public $uri = 'favorite';
-	public $login = '77004163092';
-
-	public function _fixtures() {
-		return [
+	
+	public function fixtures() {
+		$this->loadFixtures([
 			ServiceFixture::className(),
+			ServiceFieldFixture::className(),
+			ServiceFieldValidationFixture::className(),
+			ServiceFieldValueFixture::className(),
 			FavoriteFixture::className(),
-		];
+		]);
 	}
-
+	
 	public function getList(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendGET($this->uri);
-		$I->seeResponse(HttpCode::OK);
+		$I->auth(AccountEnum::USER_2);
+		$I->sendGET(self::URI);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+		$I->seeListHttpHeaders([
+			HttpHeader::TOTAL_COUNT => 2,
+			HttpHeader::PAGE_COUNT => 1,
+			HttpHeader::CURRENT_PAGE => 1,
+			HttpHeader::PER_PAGE => 20,
+		]);
+	}
+	
+	public function getListOfUser1(FunctionalTester $I)
+	{
+		$I->auth(AccountEnum::USER_1);
+		$I->sendGET(self::URI);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
+		$I->seeListHttpHeaders([
+			HttpHeader::TOTAL_COUNT => 3,
+			HttpHeader::PAGE_COUNT => 1,
+			HttpHeader::CURRENT_PAGE => 1,
+			HttpHeader::PER_PAGE => 20,
+		]);
 	}
 	
 	public function getDetails(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendGET($this->uri . '/524');
-		$I->seeResponse(HttpCode::OK);
+		$I->auth(AccountEnum::USER_2);
+		$I->sendGET(self::URI_EXISTED_ITEM);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 	
 	public function getDetailsNotExists(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendGET($this->uri . '/111111');
-		$I->seeResponse(HttpCode::NOT_FOUND);
+		$I->auth(AccountEnum::USER_2);
+		$I->sendGET(self::URI_NOT_EXISTED_ITEM);
+		$I->SeeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	
 	public function createSuccess(FunctionalTester $I) {
-		$I->auth($this->login);
+		$I->auth(AccountEnum::USER_2);
 		$body = [
-			'service_id' => '1',
+			'service_id' => '2',
 			'title' => 'qwertyuiop',
 			'fields' => [
-				'amount' => 100,
-				'account' => '1234567890',
+				'amount' => 500,
+				'account' => '7777416301',
 			],
 		];
-		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::CREATED);
+		$I->sendPOST(self::URI, $body);
+		$I->SeeResponseCodeIs(HttpCode::CREATED);
 	}
 	
-	/*public function createFailNotExistsField(FunctionalTester $I) {
-		$I->auth($this->login);
+	public function createFailNotExistsField(FunctionalTester $I) {
+		$I->auth(AccountEnum::USER_2);
 		$body = [
-			'service_id' => '20',
+			'service_id' => '2',
 			'title' => 'qwertyuiop',
 			'fields' => [
 				'amountyyy' => 100,
 				'accounttyyy' => '1234567890',
 			],
 		];
-		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI, $body);
+		$I->seeUnprocessableEntity([
 			[
-				"field" => "fields",
-                "message" => "field_not_found accountt",
+				"field" => "account",
+                "message" => "Заполните поле",
 			],
-		]);
-	}*/
-	
-	public function createFailEmptyTitle(FunctionalTester $I) {
-		$I->auth($this->login);
-		$body = [
-			'service_id' => '1',
-			'title' => '',
-			'fields' => [
-				'amount' => 100,
-				'account' => '1234567890',
-			],
-		];
-		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
 			[
-				'field' => 'title',
-				'message' => 'Title cannot be blank.',
+				"field" => "amount",
+				"message" => "Заполните поле",
 			],
 		]);
 	}
 	
 	public function createFailEmptyServiceId(FunctionalTester $I) {
-		$I->auth($this->login);
+		$I->auth(AccountEnum::USER_2);
 		$body = [
 			'service_id' => '',
 			'title' => 'qwertyuiop',
@@ -117,8 +135,8 @@ class ServiceFavoriteCest extends RestCest
 				'account' => '1234567890',
 			],
 		];
-		$I->sendPOST($this->uri, $body);
-		$I->seeResponse(HttpCode::UNPROCESSABLE_ENTITY, [
+		$I->sendPOST(self::URI, $body);
+		$I->seeUnprocessableEntity([
 			[
 				'field' => 'service_id',
 				'message' => 'Service Id cannot be blank.',
@@ -128,54 +146,54 @@ class ServiceFavoriteCest extends RestCest
 	
 	public function updateNotExisted(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendPUT($this->uri . '/111111', []);
+		$I->auth(AccountEnum::USER_2);
+		$I->sendPUT(self::URI_NOT_EXISTED_ITEM, []);
 		$I->seeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	
 	public function deleteSuccess(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendDELETE($this->uri . '/524');
-		$I->seeResponse(HttpCode::NO_CONTENT);
+		$I->auth(AccountEnum::USER_2);
+		$I->sendDELETE(self::URI_EXISTED_ITEM);
+		$I->SeeResponseCodeIs(HttpCode::NO_CONTENT);
 	}
 	
 	public function deleteNotExisted(FunctionalTester $I)
 	{
-		$I->auth($this->login);
-		$I->sendDELETE($this->uri . '/111111');
-		$I->seeResponse(HttpCode::NOT_FOUND);
+		$I->auth(AccountEnum::USER_2);
+		$I->sendDELETE(self::URI_NOT_EXISTED_ITEM);
+		$I->SeeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	
 	public function checkAuthFail(FunctionalTester $I)
 	{
-		$I->sendGET($this->uri . '/524');
+		$I->sendGET(self::URI_EXISTED_ITEM);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 		
-		$I->sendDELETE($this->uri . '/524');
+		$I->sendDELETE(self::URI_EXISTED_ITEM);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 		
-		$I->sendPUT($this->uri . '/524', []);
+		$I->sendPUT(self::URI_EXISTED_ITEM, []);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 		
-		$I->sendPOST($this->uri, []);
+		$I->sendPOST(self::URI, []);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 		
-		$I->sendGET($this->uri, []);
+		$I->sendGET(self::URI, []);
 		$I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
 	}
 	
 	public function checkAuthNoneSelf(FunctionalTester $I)
 	{
-		$I->auth('77783177384');
+		$I->auth(AccountEnum::USER_1);
 		
-		$I->sendGET($this->uri . '/524');
+		$I->sendGET(self::URI_EXISTED_ITEM);
 		$I->seeResponseCodeIs(HttpCode::NOT_FOUND);
 		
-		$I->sendDELETE($this->uri . '/524');
+		$I->sendDELETE(self::URI_EXISTED_ITEM);
 		$I->seeResponseCodeIs(HttpCode::NOT_FOUND);
 		
-		$I->sendPUT($this->uri . '/524', []);
+		$I->sendPUT(self::URI_EXISTED_ITEM, []);
 		$I->seeResponseCodeIs(HttpCode::NOT_FOUND);
 	}
 	

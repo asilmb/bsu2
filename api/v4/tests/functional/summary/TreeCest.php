@@ -5,6 +5,7 @@ namespace api\v4\tests\functional\summary;
 use api\tests\FunctionalTester;
 use yii2lab\test\RestCest;
 use Codeception\Util\HttpCode;
+use yii2lab\test\Util\Type;
 use common\fixtures\SummaryResourceFixture;
 
 class TreeCest extends RestCest
@@ -12,38 +13,39 @@ class TreeCest extends RestCest
 	
 	public $format = [
 		'url' => [
-			'avatars' => 'string:url',
-			'bank_pictures' => 'string:url',
-			'service_menu_pictures' => 'string:url',
-			'service_pictures' => 'string:url',
+			'avatars' => Type::URL,
+			'bank_pictures' => Type::URL,
+			'service_menu_pictures' => Type::URL,
+			'service_pictures' => Type::URL,
 		],
 		'static_id' => [
-			'category_root' => 'integer',
-			'addressless_transfer' => 'integer',
-			'cnp_withdrawal' => 'integer',
-			'iban_payment' => 'integer',
+			'category_root' => Type::INTEGER,
+			'addressless_transfer' => Type::INTEGER,
+			'cnp_withdrawal' => Type::INTEGER,
+			'iban_payment' => Type::INTEGER,
 		],
 		'last_modified' => [
-			'city' => self::TYPE_DATE,
-			'country' => self::TYPE_DATE,
-			//'summary_url' => self::TYPE_DATE,
-			//'summary_id' => self::TYPE_DATE,
-			'service' => self::TYPE_DATE,
-			'service_category' => self::TYPE_DATE,
+			'city' => Type::DATE,
+			'country' => Type::DATE,
+			//'summary_url' => Type::DATE,
+			//'summary_id' => Type::DATE,
+			'service' => Type::DATE,
+			'service_category' => Type::DATE,
 		],
 	];
 	public $uri = 'summary';
 	
-	public function _fixtures() {
-		return [
+	public function fixtures() {
+		$this->loadFixtures([
 			SummaryResourceFixture::className(),
-		];
+		]);
 	}
 	
 	public function listSuccess(FunctionalTester $I)
 	{
 		$I->sendGET($this->uri);
-		$I->seeResponse(HttpCode::OK);
+		$I->SeeResponseCodeIs(HttpCode::OK);
+		$I->seeResponseMatchesJsonType($this->format);
 	}
 	
 }

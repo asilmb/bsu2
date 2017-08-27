@@ -8,8 +8,5 @@ return [
 		'lang' => [
 			'class' => 'yii2module\lang\Module',
 		],
-		'uploadBehavior' => [
-			'class' => 'cyneek\yii2\uploadBehavior\Module',
-		],
 	],
 ];

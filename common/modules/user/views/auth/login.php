@@ -35,7 +35,7 @@ $loginForm = $this->render('helpers/_loginForm.php', [
 		<div class="row">
 			<div class="col-lg-5">
 				<?= $loginForm ?>
-				<?= Html::a(t('user/auth', 'register_new_user'), ['/user/reg/signup']) ?>
+				<?= Html::a(t('user/auth', 'register_new_user'), ['/user/registration']) ?>
 				<br/>
 				<?= Html::a(t('user/auth', 'i_forgot_my_password'), ['/user/password/reset-request']) ?>
 				

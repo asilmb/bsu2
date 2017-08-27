@@ -10,14 +10,21 @@ return [
 	'timeZone' => 'UTC',
 	'components' => [
 		'user' => [
-			'class' => 'yii2lab\user\yii\web\User',
-			'identityClass' => 'yii2lab\user\models\identity\Db',
+			'class' => 'api\v4\modules\user\web\User',
+			//'identityClass' => 'yii2lab\user\models\identity\Db',
 		],
-		'log' => [
+		'httpClient' => [
+			'class' => 'yii\httpclient\Client',
+		],
+				'log' => [
 			'targets' => [
 				[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['error', 'warning'],
+					'except' => [
+						'yii\web\HttpException:*',
+						YII_ENV_TEST ? 'yii\i18n\PhpMessageSource::loadMessages' : null,
+					],
 				],
 			],
 			'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -66,7 +73,7 @@ return [
 			'schemaCacheDuration' => 3600,
 			'schemaCache' => 'cache',
 			*/
-		]),
+		], YII_ENV_TEST ? 'test' : 'main'),
 		'mailer' => [
 			'class' => 'yii\swiftmailer\Mailer',
 			'viewPath' => '@common/mail',

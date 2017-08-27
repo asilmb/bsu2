@@ -11,7 +11,7 @@ $this->title = t('app/cache','title');
 ?>
 
 <div class="box box-primary">
-	<? $form = ActiveForm::begin([
+	<?php $form = ActiveForm::begin([
 		'options' => ['class' => 'form-vertical'],
 	]);?>
 		<div class="box-body">
@@ -38,5 +38,5 @@ $this->title = t('app/cache','title');
 		<div class="box-footer">
 			<?= Html::submitButton('<i class="fa fa-trash-o"></i> '.t('main','clear'), ['class' => 'btn btn-danger', 'name' => 'clear-button']);?>
 		</div>
-	<? ActiveForm::end(); ?>
+	<?php ActiveForm::end(); ?>
 </div>

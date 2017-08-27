@@ -1,4 +1,4 @@
-<?
+<?php
 return [
 	'title' => 'Управление языками',
 	'language_id' => 'Язык ID',

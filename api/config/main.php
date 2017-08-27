@@ -7,16 +7,7 @@ return [
 		'user' => [
 			'enableSession' => false, // ! important
 			'loginUrl' => null,
-			'identityClass' => 'yii2lab\user\models\identity\Tps',
-		],
-		'bank' => 'api\v4\modules\bank\services\BankService',
-		'service' => [
-			'class' => 'api\v4\modules\service\services\ServiceService',
-			'repositoryDriver' => 'ar',
-		],
-		'card' => [
-			'class' => 'api\v4\modules\card\services\card\Service',
-			'repositoryClass' => 'RepositoryTps',
+			//'identityClass' => 'yii2lab\user\models\identity\Uni',
 		],
 		'lng' => [
 			'store' => [
@@ -26,6 +17,7 @@ return [
 		'request' => [
 			'class' => '\yii\web\Request',
 			'enableCookieValidation' => false,
+			'enableCsrfValidation' => false,
 			'parsers' => [
 				'application/json' => 'yii\web\JsonParser',
 				'multipart/form-data' => 'yii\web\MultipartFormDataParser',
@@ -44,6 +36,11 @@ return [
 		],
 		'urlManager' => [
 			'enableStrictParsing' => true,
+		],
+		'formatter' => [
+			'dateFormat' => 'Y-m-d\TH:i:s\Z',
+			'timeFormat' => 'Y-m-d\TH:i:s\Z',
+			'datetimeFormat' => 'Y-m-d\TH:i:s\Z',
 		],
 	],
 ];
