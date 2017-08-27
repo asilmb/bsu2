@@ -19,20 +19,7 @@ class PageController extends Controller
 		if(Yii::$app->request->getIsPost()){
 			$success = false;
 			if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-				if ($form->backend_app) {
-					$model->clearCash('backend');
-					$success = true;
-				}
-
-				if ($form->frontend_app) {
-					$model->clearCash('frontend');
-					$success = true;
-				}
-				
-				if ($form->api_app) {
-					$model->clearCash('api');
-					$success = true;
-				}
+	
 				if ($success) {
 					Alert::add(['news/news', 'cache_successfully_flushed'], Alert::TYPE_SUCCESS);
 				} else {

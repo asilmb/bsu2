@@ -7,46 +7,6 @@ $tpsOrTest = YII_ENV_TEST ? 'test' : $tpsOrTest;
 
 return [
 	'components' => [
-		'geo' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\geo',
-			'repositories' => [
-				'region',
-				'city',
-				'country',
-				'currency',
-			],
-			'services' => [
-				'region',
-				'city',
-				'country',
-				'currency',
-			],
-		],
-		'active' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\active',
-			'repositories' => [
-				'active' => 'ar',
-				'field' => 'ar',
-				'category' => 'ar',
-				'provider' => 'ar',
-				'type' => 'ar',
-				'option' => 'ar',
-				'validation' => 'ar',
-				'handler' => 'disc',
-			],
-			'services' => [
-				'active',
-				'field',
-				'category',
-				'provider',
-				'type',
-				'option',
-				'validation',
-				'handler',
-			],
-		],
 		'account' => [
 			'class' => 'common\ddd\Domain',
 			'path' => 'api\v4\modules\user',
@@ -87,26 +47,6 @@ return [
 				'qr',
 			],
 		],
-		'summary' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\summary',
-			'repositories' => [
-				'summary',
-			],
-			'services' => [
-				'summary',
-			],
-		],
-		'notify' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\notify',
-			'repositories' => [
-				'transport',
-			],
-			'services' => [
-				'transport',
-			],
-		],
 		'personal' => [
 			'class' => 'common\ddd\Domain',
 			'path' => 'api\v4\modules\personal',
@@ -117,63 +57,6 @@ return [
 				'bonus',
 			],
 		],
-		'bank' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\bank',
-			'repositories' => [
-				'banking'=> 'tps',
-				'bin' => 'ar',
-				'bank' => 'tps',
-				'card' => $tpsOrTest,
-			],
-			'services' => [
-				'banking',
-				'bin',
-				'bank',
-				'card',
-			],
-		],
-		'service' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\service',
-			'repositories' => [
-				'service',
-				'field',
-				'category',
-				'favorite',
-			],
-			'services' => [
-				'service',
-				'field',
-				'category',
-				'favorite',
-			],
-		],
-		'transaction' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\transaction',
-			'defaultDriver' => 'tps',
-			'repositories' => [
-				'payment',
-				'history',
-				'card',
-			],
-			'services' => [
-				'payment',
-				'history',
-				'card',
-			],
-		],
-		'convertation' => [
-			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\convertation',
-			'defaultDriver' => 'tps',
-			'repositories' => [
-				'convertation',
-			],
-			'services' => [
-				'convertation',
-			],
-		],
+
 	],
 ];

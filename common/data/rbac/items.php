@@ -79,6 +79,7 @@ return [
             'active.type.manage',
             'geo.region.manage',
             'notify.transport.manage',
+            'balhash.admin',
         ],
     ],
     'rNalInsp' => [
@@ -358,6 +359,9 @@ return [
         'type' => 2,
     ],
     'notify.transport.manage' => [
+        'type' => 2,
+    ],
+    'balhash.admin' => [
         'type' => 2,
     ],
 ];

@@ -2,39 +2,14 @@
 
 return [
 	'modules' => [
-		'notify' => [
-			'class' => 'api\v4\modules\notify\Module',
-		],
-		'service' => [
-			'class' => 'api\v4\modules\service\Module',
-		],
-		'active' => [
-			'class' => 'api\v4\modules\active\Module',
-		],
+
 		'user' => [
 			'class' => 'api\v4\modules\user\Module',
 		],
-		'geo' => [
-			'class' => 'api\v4\modules\geo\Module',
+		'content' => [
+			'class' => 'api\v4\modules\content\Module',
 		],
-		'summary' => [
-			'class' => 'api\v4\modules\summary\Module',
-		],
-		'transaction' => [
-			'class' => 'api\v4\modules\transaction\Module',
-		],
-		'bank' => [
-			'class' => 'api\v4\modules\bank\Module',
-		],
-		'transfer' => [
-			'class' => 'api\v4\modules\transfer\Module',
-		],
-		'convertation' => [
-			'class' => 'api\v4\modules\convertation\Module',
-		],
-		'personal' => [
-			'class' => 'api\v4\modules\personal\Module',
-		],
+
 	],
 	'components' => [
 		'urlManager' => [

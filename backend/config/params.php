@@ -27,7 +27,7 @@ return [
 			'items' => [
 				[
 					'label' => ['admin/content', 'title'],
-					'url' => 'admin/content',
+					'url' => 'content',
 				],
 			],
 		],
