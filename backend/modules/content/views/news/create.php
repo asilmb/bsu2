@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model common\modules\content\models\news */
+
+
 
 $this->title = t('content/news_create', 'title');
 $this->params['breadcrumbs'][] = ['label' => t('content/news_create', 'news'), 'url' => ['index']];

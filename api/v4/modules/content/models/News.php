@@ -12,7 +12,7 @@ class News extends ActiveRecord
 	 */
 	public static function tableName()
 	{
-		return '{{%active_category}}';
+		return '{{%news}}';
 	}
 	
 }

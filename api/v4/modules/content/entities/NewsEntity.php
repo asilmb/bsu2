@@ -8,8 +8,8 @@ class NewsEntity extends BaseEntity {
 	
 	protected $id;
 	protected $title;
-	protected $description;
-	protected $logo;
-	protected $position;
+	protected $anons;
+	protected $create_time;
+	protected $body;
 	
 }

@@ -2,12 +2,10 @@
 
 namespace backend\modules\content\controllers;
 
-use common\modules\content\models\News;
-use common\modules\content\models\NewsSearch;
+
+use api\v4\modules\content\forms\NewsForm;
 use Yii;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 
 /**
  * NewsController implements the CRUD actions for news model.
@@ -16,16 +14,31 @@ class NewsController extends Controller {
 	/**
 	 * @inheritdoc
 	 */
-	public function behaviors() {
+	public function actions() {
 		return [
-			'verbs' => [
-				'class' => VerbFilter::className(),
-				'actions' => [
-					'delete' => ['POST'],
-				],
+			'index' => [
+				'class' => 'backend\modules\content\actions\IndexAction',
+				'service' => Yii::$app->content->news,
+				'view' => '/news',
+			],
+			'create' => [
+				'class' => 'backend\modules\content\actions\CreateAction',
+				'service' => Yii::$app->content->news,
+				'form' => 'NewsForm',
+				'model' => new NewsForm(),
+				'view' => '/news',
+			],
+			'update' => [
+				'class' => 'backend\modules\content\actions\UpdateAction',
+				'service' => Yii::$app->content->news,
+				'form' => 'NewsForm',
+				'model' => new NewsForm(),
+				'view' => '/news'
+			],
+			'delete' => [
+				'class' => 'backend\modules\content\actions\DeleteAction',
+				'service' => Yii::$app->content->news,
 			],
 		];
 	}
-	
-
 }

@@ -34,6 +34,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'content:ntext',
             'created_at',
         ],
+	    [
+		    'class' => '\yii\grid\ActionColumn',
+		    'template' => '{update}{view}{delete}',
+		    'buttons' => [
+			    'update' => function ($url, $model) {
+				    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+					    'title' => t('active/field', 'update_action'),
+				    ]);
+			    },
+			    'delete' => function ($url, $model) {
+				    return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+					    'title' => t('active/field', 'delete_action'),
+				    ]);
+			    },
+		    ],
+		    'urlCreator' => function ($action, $model, $key, $index) {
+			    if ($action === 'update') {
+				    $url = 'field/update?id=' . $model->id;
+				    return $url;
+			    }
+			    if ($action === 'delete') {
+				    $url = 'field/delete?id=' . $model->id;
+				    return $url;
+			    }
+		    },
+	    ],
     ]) ?>
 
 </div>

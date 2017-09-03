@@ -1,6 +1,6 @@
 <?php
 
-namespace api\v4\modules\active\services;
+namespace api\v4\modules\content\services;
 
 use common\ddd\services\ActiveBaseService;
 

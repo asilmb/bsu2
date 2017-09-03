@@ -30,6 +30,7 @@ return [
 				
 				['class' => 'yii\rest\UrlRule', 'controller' => ['content' => 'content/page']],
 				['class' => 'yii\rest\UrlRule', 'controller' => ['news' => 'content/news']],
+				'news/<action>' => 'content/news/<action>',
 				// ----------------- Active module -----------------
 				
 				['class' => 'yii\rest\UrlRule', 'controller' => ['active' => 'active/type']],
