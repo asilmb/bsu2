@@ -47,14 +47,14 @@ return [
 				'qr',
 			],
 		],
-		'personal' => [
+		'content' => [
 			'class' => 'common\ddd\Domain',
-			'path' => 'api\v4\modules\personal',
+			'path' => 'api\v4\modules\content',
 			'repositories' => [
-				'bonus' => 'ar',
+				'news' => 'ar',
 			],
 			'services' => [
-				'bonus',
+				'news',
 			],
 		],
 

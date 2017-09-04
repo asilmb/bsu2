@@ -52,7 +52,8 @@
 		"yii2module/yii2-lang": "dev-master",
 		"yii2module/yii2-rest-client": "dev-master",
 		"yii2module/yii2-restapidoc": "dev-master",
-		
+        "mihaildev/yii2-ckeditor": "*",
+        "mihaildev/yii2-elfinder": "*",
         "yii2woop/yii2-tps": "dev-master",
 		
 		"php": ">=5.4.0",

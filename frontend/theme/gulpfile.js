@@ -59,7 +59,7 @@ gulp.task('styles', function () {
 			cascade: false
 		}))
 		.pipe(concat('style.min.css'))
-		.pipe(gulp.dest('./../../web/css'))
+		.pipe(gulp.dest('./../web/css'))
 		.pipe(browserSync.stream());
 });
 
@@ -82,7 +82,7 @@ gulp.task('styles-mobile', function () {
 			cascade: false
 		}))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest('./../../web/css'))
+		.pipe(gulp.dest('./../web/css'))
 		.pipe(browserSync.stream());
 });
 
@@ -100,7 +100,7 @@ gulp.task('img', function () {
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		}))
-		.pipe(gulp.dest('./../../web/images/'))
+		.pipe(gulp.dest('./../web/images/'))
 		.pipe(browserSync.stream());
 });
 
