@@ -21,26 +21,26 @@ $this->params['breadcrumbs'][] = $this->title;
 		'dataProvider' => $dataProvider,
 		'columns' => [
 			['class' => 'yii\grid\SerialColumn'],
-	
+
 			'id',
 			'title',
             'anons',
 			'create_time',
-			
+
 			[
 				'class' => '\yii\grid\ActionColumn',
-				'template' => '{update}{delete}',
+				'template' => '{update}{view}{delete}',
 				'buttons' => [
 					'update' => function ($url, $model) {
 						return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
 							'title' => t('content/news', 'update_action'),
 						]);
 					},
-					//'view' => function ($url, $model) {
-					//	return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-					//		'title' => t('active/field', 'view_action'),
-					//	]);
-					//},
+					'view' => function ($url, $model) {
+						return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+							'title' => t('content/news', 'view_action'),
+						]);
+					},
 					'delete' => function ($url, $model) {
 						return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
 							'title' => t('content/news', 'delete_action'),
@@ -52,10 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
 						$url = 'news/update?id=' . $model->id;
 						return $url;
 					}
-					//if ($action === 'view') {
-					//	$url = 'field/view?id=' . $model->id;
-					//	return $url;
-					//}
+					if ($action === 'view') {
+						$url = 'news/view?id=' . $model->id;
+						return $url;
+					}
 					if ($action === 'delete') {
 						$url = 'news/delete?id=' . $model->id;
 						return $url;

@@ -9,5 +9,5 @@ use yii\base\Module as YiiModule;
  */
 class Module extends YiiModule
 {
-	public static $langDir = 'common/modules/content/messages';
+
 }

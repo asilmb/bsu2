@@ -4,6 +4,9 @@ namespace backend\modules\content\controllers;
 
 
 use api\v4\modules\content\forms\NewsForm;
+use api\v4\modules\user\forms\ImageForm;
+use common\exceptions\UnprocessableEntityHttpException;
+use common\widgets\Alert;
 use Yii;
 use yii\web\Controller;
 
@@ -21,6 +24,11 @@ class NewsController extends Controller {
 				'service' => Yii::$app->content->news,
 				'view' => '/news',
 			],
+            'view' => [
+                'class' => 'backend\modules\content\actions\ViewAction',
+                'service' => Yii::$app->content->news,
+                'view' => '/news',
+            ],
 			'create' => [
 				'class' => 'backend\modules\content\actions\CreateAction',
 				'service' => Yii::$app->content->news,
@@ -41,4 +49,5 @@ class NewsController extends Controller {
 			],
 		];
 	}
+
 }

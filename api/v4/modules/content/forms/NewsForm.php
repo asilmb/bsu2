@@ -9,6 +9,8 @@ class NewsForm extends Model {
 	public $id;
 	public $title;
 	public $anons;
+    public $image;
+    public $image_url;
 	public $create_time;
 	public $body;
 	

@@ -17,6 +17,8 @@ class m170903_052420_create_news_table extends Migration
 		return [
 			'id' => $this->primaryKey(),
 			'title' => $this->string(),
+            'image' => $this->string(),
+            'image_url' => $this->string(),
 			'anons' => $this->string(),
 			'body' =>$this->string(),
 			'create_time'=> $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP')
