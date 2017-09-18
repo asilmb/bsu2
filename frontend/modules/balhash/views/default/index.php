@@ -72,7 +72,8 @@
                 </div>
                 <div class="row-input">
                     <div class="input-wrapper form--text">
-                        <textarea rows="1" tabindex="3" placeholder="Напишите свой вопрос" id="textMessage"></textarea>
+                            <textarea rows="1" tabindex="3" placeholder="Напишите свой вопрос"
+                                      id="textMessage"></textarea>
                     </div>
                 </div>
                 <div class="row-input">
@@ -84,91 +85,8 @@
 
         <div class="news">
             <h3> Новости</h3>
-            <div class="news-body">
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-                <div class="news--item">
-                    <span class="date">21 мая 2017</span>
-                    <p>
-                        Общая информация
-                        информация
-                        об автомобильном
-                        страховании
-                    </p>
-                </div>
-
-
-            </div>
+			<?= $this->render('news/listNews', ['news' => $news]); ?>
         </div>
     </div>
+    </div >
 </section>
