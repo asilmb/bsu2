@@ -41,7 +41,7 @@ return [
 	'static' => [
 		'path' => [
 			'avatar' => 'images/avatars',
-			'qr' => 'images/qr',
+			'image' => 'images/news',
 		],
 	],
 	'servers' => env('servers'),

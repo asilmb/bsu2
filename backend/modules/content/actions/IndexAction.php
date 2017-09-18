@@ -21,7 +21,7 @@ class IndexAction extends Action {
 				'pageSize' => Yii::$app->params['pageSize'],
 			],
 		]);
-		return $this->controller->render($this->view . '/', [
+		return $this->controller->render($this->view . '/index', [
 			'dataProvider' => $dataProvider,
 		]);
 	}

@@ -7,7 +7,7 @@ use Yii;
 
 class ImageService extends ActiveBaseService {
 	
-	public function getSelf($id) {
+	public function oneByNews($id) {
 		$news = $this->domain->news->oneById($id);
 		$entity = $this->repository->forgeEntity([
 			'name' => $news->image,
@@ -15,21 +15,20 @@ class ImageService extends ActiveBaseService {
 		]);
 		return $entity;
 	}
-	
-	public function updateSelf($image) {
+	public function updateSelf($image, $id) {
 		$name = $this->repository->save($image, Yii::$app->user->id);
-		$this->changeImageInnews($name);
+		$this->changeImageInNews($name, $id);
 	}
 	
-	public function deleteSelf() {
+	public function deleteSelf($id) {
 		$this->domain->repositories->image->delete(Yii::$app->user->id);
-		$this->changeImageInNews(null);
+		$this->changeImageInNews(null, $id);
 	}
 	
-	private function changeImageInNews($name) {
-		$news = $this->domain->news->getSelf();
+	private function changeImageInNews($name, $id) {
+		$news = $this->domain->news->oneById($id);
 		$body['image'] = $name;
-		$this->domain->news->updateById($news->login, $body);
+		$this->domain->news->updateById($news->id, $body);
 	}
 	
 }

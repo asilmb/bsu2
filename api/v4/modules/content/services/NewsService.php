@@ -9,18 +9,6 @@ use yii2mod\helpers\ArrayHelper;
 
 class NewsService extends ActiveBaseService {
 
-    //todo передавать сюда id  новости
-    public function getSelf() {
-        $login = Yii::$app->user->identity->login;
-        try {
-            $profile = $this->oneById($login);
-        } catch (NotFoundHttpException $e) {
-            $this->create(['login' => $login]);
-            $profile = $this->oneById($login);
-        }
-        return $profile;
-    }
-
     public function updateSelf($body) {
         $profile = $this->getSelf();
         $body = ArrayHelper::toArray($body);

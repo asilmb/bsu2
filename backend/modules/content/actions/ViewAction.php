@@ -15,17 +15,17 @@ class ViewAction extends Action
     public $service;
     public $view;
 
-    public function run()
+    public function run($id)
     {
         $model = new ImageForm();
         if (Yii::$app->request->isPost) {
             if (Yii::$app->request->post('submit') === 'delete') {
-                Yii::$app->content->image->deleteSelf();
-                Alert::add(['user/avatar', 'delete_success'], Alert::TYPE_SUCCESS);
+                Yii::$app->content->image->deleteSelf($id);
+                Alert::add(['content/image', 'delete_success'], Alert::TYPE_SUCCESS);
             } else {
                 if ($model->validate()) {
                     try {
-                        Yii::$app->content->image->updateSelf($model->imageFile);
+                        Yii::$app->content->image->updateSelf($model->imageFile, $id);
                         Alert::add(['content/image', 'uploaded_success'], Alert::TYPE_SUCCESS);
                     } catch (UnprocessableEntityHttpException $e) {
                         $model->addErrorsFromException($e);
@@ -33,8 +33,7 @@ class ViewAction extends Action
                 }
             }
         }
-        //todo изменить на нахождение через новость. Передавать сюда новость
-        $entity = Yii::$app->news->image->oneById($id);
+        $entity = Yii::$app->content->image->oneByNews($id);
         return $this->controller->render($this->view .'/view', ['model' => $model, 'image' => $entity]);
     }
 }

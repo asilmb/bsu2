@@ -16,16 +16,16 @@ class NewsEntity extends BaseEntity {
 	protected $body;
 
 
-    public function getAvatarUrl() {
-        if(empty($this->avatar_url)) {
-            $repository = Yii::$app->account->repositories->avatar;
-            if(empty($this->avatar)) {
-                $this->avatar_url = env('url.static') . $repository->defaultName;
+    public function getImageUrl() {
+        if(empty($this->image_url)) {
+            $repository = Yii::$app->account->repositories->image;
+            if(empty($this->image)) {
+                $this->image_url = env('url.static') . $repository->defaultName;
             } else {
-                $baseUrl = env('url.static') . param('static.path.avatar') . '/';
-                $this->avatar_url = $baseUrl . $this->avatar . '.' . $repository->format;
+                $baseUrl = env('url.static') . param('static.path.image') . '/';
+                $this->image_url = $baseUrl . $this->image . '.' . $repository->format;
             }
         }
-        return $this->avatar_url;
+        return $this->image_url;
     }
 }
