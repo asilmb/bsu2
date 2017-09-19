@@ -25,8 +25,14 @@ return [
 		],
 		
 		'urlManager' => [
+
+
 			'rules' => [
-				''=> 'balhash',
+				''=> 'balhash/main',
+
+                // ----------------- Main module -----------------
+
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['' => 'balhash/main']],
 
 			],
 		],

@@ -5,7 +5,7 @@ namespace frontend\modules\balhash\controllers;
 use Yii;
 use yii\web\Controller;
 
-class DefaultController extends Controller {
+class MainController extends Controller {
 	
 	public function actionIndex() {
 		$news = Yii::$app->content->news->all();
