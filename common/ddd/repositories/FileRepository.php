@@ -34,7 +34,11 @@ class FileRepository extends BaseRepository {
 		$fileName = $path . $this->getFileName($name, $format);
 		return $fileName;
 	}
-	
+    protected function getFrontFilePath($name, $format = null) {
+        $path = $this->getFrontPath();
+        $fileName = $path . $this->getFileName($name, $format);
+        return $fileName;
+    }
 	protected function getFileName($name, $format = null) {
 		$format = $this->getFormat($format);
 		$fileName = $name . '.' . $format;
@@ -61,7 +65,19 @@ class FileRepository extends BaseRepository {
 		}
 		return $path . DS;
 	}
-	
+    protected function getFrontPath($addPath = null) {
+        if(empty($this->pathName)) {
+            throw new InvalidConfigException('Property "pathName" not assigned');
+        }
+        $path = param('static.path.' . $this->pathName);
+
+        $path = Yii::getAlias('@frontend/web/' . $path);
+        $path = FileHelper::normalizePath($path);
+        if($addPath) {
+            $path .= DS . $addPath;
+        }
+        return $path . DS;
+    }
 	protected function createDirectory($addPath = null) {
 		if(isset($this->isDirectoryExists[$addPath])) {
 			return;

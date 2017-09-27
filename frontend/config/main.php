@@ -32,8 +32,9 @@ return [
 
                 // ----------------- Main module -----------------
 
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['' => 'balhash/main']],
 
+                'news' => 'balhash/main/news',
+                'news/<id>' => 'balhash/main/news'
 			],
 		],
 	],

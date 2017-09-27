@@ -12,8 +12,8 @@ use yii\widgets\ActiveForm;
 
 <div class="row">
 	<div class="col-lg-3">
-        
-        <img src="<?= $avatar->url ?>" />
+       <?php $path= '@frontend/web'?>
+        <img src="<?= $path ?>" />
         
 		<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 		

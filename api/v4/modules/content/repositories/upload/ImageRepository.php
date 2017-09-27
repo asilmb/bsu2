@@ -74,6 +74,9 @@ class ImageRepository extends FileRepository {
 		$size = $this->size;
 		$thumbFileName = $this->getThumbFileName($fileName, $userId);
 		$fullThumbFileName = $this->getFilePath($thumbFileName);
+        $fullFrontFileName = $this->getFrontFilePath($thumbFileName);
+        Image::thumbnail($fileName, $size, $size)
+            ->save($fullFrontFileName, ['quality' => $this->quality]);
 		Image::thumbnail($fileName, $size, $size)
 			->save($fullThumbFileName, ['quality' => $this->quality]);
 	}
