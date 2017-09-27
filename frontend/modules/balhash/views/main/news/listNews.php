@@ -2,8 +2,8 @@
 <style>
     .news-body {
         overflow: hidden;
-        height: 200px;
-        width: 300px;
+        height: 250px;
+        width: 100%;
     }
 
     .news-body .news--item {
@@ -15,10 +15,10 @@
 </style>
 
 
-<div class="news-body">
+<div class="news-body owl-carousel owl-theme">
 
     <?php
     foreach ($news as $oneNews) {
-        echo $this->render('listNewsItem', ['news' => $news]);
+        echo $this->render('listNewsItem', ['oneNews' => $oneNews]);
     } ?>
 </div>

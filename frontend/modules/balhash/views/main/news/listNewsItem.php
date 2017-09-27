@@ -1,7 +1,7 @@
-<div class="news--item">
+<a class="news--item">
 
-    <span class="date"><?= var_dump($oneNews) ?> </span>
+    <span class="date"><?= $oneNews->title ?> </span>
     <p>
         <?= $oneNews->anons ?>
     </p>
-</div>
+</a>

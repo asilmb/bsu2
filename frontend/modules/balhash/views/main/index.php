@@ -24,7 +24,7 @@
 <section class="main-page">
     <div class="container">
         <div class="notifications">
-            <div class="notifications-slider">
+            <div class="notifications-slider owl-carousel owl-theme">
                 <div>
                     <h3>Экстренные уведомления</h3>
                     <p>
@@ -87,6 +87,9 @@
             <h3> Новости</h3>
 			<?= $this->render('news/listNews', ['news' => $news]); ?>
         </div>
-    </div>
+
     </div >
 </section>
+<script>
+
+</script>

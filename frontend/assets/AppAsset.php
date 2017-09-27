@@ -14,10 +14,12 @@ class AppAsset extends AssetBundle
 
 	public $css = [
 		'css/style.min.css',
+        'css/owl.carousel.min.css',
+        'css/owl.theme.default.min.css'
 	];
 	public $js = [
 		'js/jquery-3.2.1.min.js',
-		'js/sly.min.js',
+		'js/owl.carousel.min.js',
 		'js/application.min.js',
 	];
 	public $depends = [

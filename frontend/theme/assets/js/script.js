@@ -6,11 +6,19 @@ function truncate(str, maxlength) {
 	
 	return str;
 }
-var options = {
-	horizontal: 1,
-	itemNav: 'basic',
-	speed: 500,
-	mouseDragging: 1,
-	touchDragging: 1
-};
-$('.news-body').sly(options);
+$(document).ready(function(){
+    $('.news-body').owlCarousel({
+        items: 4,
+        margin: 10,
+		loop:true,
+        nav: false,
+        dots: true
+    });
+    $('.notifications-slider').owlCarousel({
+        items: 1,
+        margin: 10,
+        loop:true,
+        nav: false,
+        dots: true
+    });
+});

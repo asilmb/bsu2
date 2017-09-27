@@ -14,16 +14,8 @@
   p
     padding: 20px
     font-size: 16px
-  .slick-dotted.slick-slider
+  .notifications-slider
     height: 100%
-  .slick-dots
-    bottom: 0
-  .slick-dots li.slick-active button:before
-    color: white
-    opacity: 1
-  .slick-dots li button:before
-    color: white
-    font-size: 12px
 .row-input+.row-input
   margin-top: 20px
 .row-input
@@ -71,6 +63,11 @@
         position: relative
         width: 90%
         padding-top: 20px
+.owl-dots
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
 .news
   position: relative
   background: white
@@ -84,15 +81,24 @@
     top: 25px
     left: 20px
   span
-    color: #909090
+    font-size: 18px
+    font-weight: 500
   p
     margin-top: 10px
-    padding-right: 40px
+    padding-right: 30px
   .news-body
     position: relative
     display: flex
+    overflow: hidden
+    height: 250px
+    width: 100%
     .news--item
       padding: 50px 10px
       border-right: 1px solid #E6E6E6
-
+      -webkit-column-width: 150px
+      -moz-column-width: 150px
+      column-width: 150px
+      height: 100%
+    .owl-dots .owl-dot.active span
+      background: black
 

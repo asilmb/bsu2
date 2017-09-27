@@ -30,7 +30,7 @@ gulp.task('scripts', function () {
 		}))
 		.pipe(concat('application.min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('./../../web/js/'))
+		.pipe(gulp.dest('./../web/js/'))
 		.pipe(browserSync.stream({mangle: false}));
 
 });
