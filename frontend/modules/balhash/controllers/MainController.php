@@ -12,11 +12,12 @@ class MainController extends Controller {
 		return $this->render('index', ['news' => $news]);
 	}
     public function actionNews($id = null) {
+        $news = Yii::$app->content->news->all();
 	    if(empty($id)){
-            $news = Yii::$app->content->news->all();
+
             return $this->render('news/viewAll', ['news' => $news]);
         }
         $newsEntity = Yii::$app->content->news->oneById($id);
-        return $this->render('news/view', ['newsEntity' => $newsEntity]);
+        return $this->render('news/view', ['newsEntity' => $newsEntity, 'news' => $news]);
     }
 }

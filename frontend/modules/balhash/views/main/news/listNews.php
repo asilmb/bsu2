@@ -1,9 +1,7 @@
 
 <style>
 
-    .news-body .news--item {
-        display: block;
-    }
+
 </style>
 
 

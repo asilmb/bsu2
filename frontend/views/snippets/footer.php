@@ -1,7 +1,8 @@
 <?php
 
 ?>
-<footer>
+
+<footer class="footer">
     <div class="container">
         <div class="copyright">
             <p>© 2017 КГП «Балхаш Су»</p>
@@ -12,4 +13,5 @@
         </div>
     </div>
 </footer>
+
 						 

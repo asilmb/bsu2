@@ -11,7 +11,9 @@ class AppAsset extends AssetBundle
 {
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
-
+    public $jsOptions = array(
+        'position' => \yii\web\View::POS_HEAD
+    );
 	public $css = [
 		'css/style.min.css',
         'css/owl.carousel.min.css',
