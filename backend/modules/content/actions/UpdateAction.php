@@ -16,7 +16,7 @@ class UpdateAction extends Action {
 	public function run($id) {
 		$body = Yii::$app->request->getBodyParam($this->form);
 		if (!empty($body)) {
-			$returnUrl = '/news';
+			$returnUrl = $this->view;
 			$this->service->updateById($id, $body);
 			Alert::add(['content/news', 'update_success'], Alert::TYPE_SUCCESS);
 			return $this->controller->redirect($returnUrl);

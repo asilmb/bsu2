@@ -52,10 +52,12 @@ return [
 			'path' => 'api\v4\modules\content',
 			'repositories' => [
 				'news' => 'ar',
+                'extraNews' => 'ar',
                 'image' => 'upload',
 			],
 			'services' => [
 				'news',
+                'extraNews',
                 'image'
 			],
 		],

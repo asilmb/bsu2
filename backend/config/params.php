@@ -29,6 +29,10 @@ return [
 					'label' => ['content/news', 'title'],
 					'url' => 'news',
 				],
+                [
+                    'label' => ['content/extraNews', 'title'],
+                    'url' => 'extraNews',
+                ],
 			],
 		],
 		[

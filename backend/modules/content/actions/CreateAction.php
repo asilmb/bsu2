@@ -15,7 +15,7 @@ class CreateAction extends Action {
 	public function run() {
 		$model = $this->model;
 		$body = Yii::$app->request->getBodyParam($this->form);
-		$returnUrl ='/news';
+		$returnUrl = $this->view;
 	
 		$isValid = $model->load($body, '') && $model->validate();
 		if ($isValid) {

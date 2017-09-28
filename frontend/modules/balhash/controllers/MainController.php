@@ -9,6 +9,7 @@ class MainController extends Controller {
 	
 	public function actionIndex() {
 		$news = Yii::$app->content->news->all();
+        $extraNews = Yii::$app->content->extraNews->all();
 		return $this->render('index', ['news' => $news]);
 	}
     public function actionNews($id = null) {
