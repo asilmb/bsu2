@@ -1,10 +1,3 @@
-
-<style>
-
-
-</style>
-
-
 <div class="news-body owl-carousel owl-theme">
 
     <?php
