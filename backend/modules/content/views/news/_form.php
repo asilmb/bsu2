@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 	<?php $form = ActiveForm::begin(); ?>
 	
 	<?= $form->field($model, 'title')->textInput(['maxlength' => '50']) ?>
-	<?= $form->field($model, 'anons')->textInput(['maxlength' => '150']) ?>
+	<?= $form->field($model, 'anons')->textInput(['maxlength' => '130']) ?>
 	<?= $form->field($model, 'body')->widget(CKEditor::className(),[
 		'editorOptions' => [
 			'preset' => 'full',

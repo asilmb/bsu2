@@ -80,6 +80,7 @@
     position: absolute
     top: 25px
     left: 20px
+    z-index: 10000
   span
     font-size: 18px
     font-weight: 500
@@ -98,8 +99,11 @@
       -webkit-column-width: 150px
       -moz-column-width: 150px
       column-width: 150px
-      height: 100%
+      border-radius: 15px
+      height: 150px
       display: block
+      &:hover
+        background: #0071B3
     .owl-dots .owl-dot.active span
       background: black
 .news-bottom
