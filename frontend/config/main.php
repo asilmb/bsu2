@@ -23,17 +23,14 @@ return [
 		'errorHandler' => [
 			'errorAction' => 'error/error/error',
 		],
-		
+
 		'urlManager' => [
-
-
 			'rules' => [
 				''=> 'balhash/main',
 
                 // ----------------- Main module -----------------
-
-
                 'news' => 'balhash/main/news',
+                'mailer' => 'balhash/main/mailer',
                 'news/<id>' => 'balhash/main/news'
 			],
 		],

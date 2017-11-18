@@ -2,6 +2,7 @@
 
 namespace frontend\modules\balhash\controllers;
 
+use api\v4\modules\user\forms\MailerForm;
 use Yii;
 use yii\web\Controller;
 
@@ -25,4 +26,16 @@ class MainController extends Controller
         $newsEntity = Yii::$app->content->news->oneById($id);
         return $this->render('news/view', ['newsEntity' => $newsEntity, 'news' => $news]);
     }
+    public function actionMailer()
+    {
+        $model = new MailerForm();
+        if ($model->load(Yii::$app->request->post()) && $model->sendEmail()) {
+            Yii::$app->session->setFlash('mailerFormSubmitted');
+            return $this->refresh();
+        }
+        return $this->render('mailer', [
+            'model' => $model,
+        ]);
+    }
+
 }

@@ -74,14 +74,20 @@ return [
 			'schemaCache' => 'cache',
 			*/
 		], YII_ENV_TEST ? 'test' : 'main'),
-		'mailer' => [
-			'class' => 'yii\swiftmailer\Mailer',
-			'viewPath' => '@common/mail',
-			// send all mails to a file by default. You have to set
-			// 'useFileTransport' to false and configure a transport
-			// for the mailer to send real emails.
-			'useFileTransport' => YII_DEBUG,
-		],
+        'mail' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'username@gmail.com',
+                'password' => 'password',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+        ],
+
+
 		/* 'settings' => [
 			'class' => 'yii2mod\settings\components\Settings',
 		], */

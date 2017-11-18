@@ -27,25 +27,25 @@
 
         <div class="blog-section clearfix">
             <div class="director-image"></div>
-            <form>
+            <form action="/mailer" method="POST">
                 <div class="row-input">
                     <h3>Задать вопрос генеральному директору</h3>
                 </div>
                 <div class="row-input">
                     <div class="input-wrapper">
-                        <input maxlength="18" tabindex="1" id="input1" type="text" placeholder="Ваше имя"
+                        <input maxlength="18" tabindex="1" id="input1" name="fromName" type="text" placeholder="Ваше имя"
                                autocomplete="off">
                     </div>
                 </div>
                 <div class="row-input">
                     <div class="input-wrapper">
-                        <input maxlength="18" tabindex="2" id="input2" type="text" placeholder="E-mail"
+                        <input maxlength="18" tabindex="2" id="input2"  name="fromEmail" type="text" placeholder="E-mail"
                                autocomplete="off">
                     </div>
                 </div>
                 <div class="row-input">
                     <div class="input-wrapper form--text">
-                            <textarea rows="1" tabindex="3" placeholder="Напишите свой вопрос"
+                            <textarea rows="1" tabindex="3" name="body" placeholder="Напишите свой вопрос"
                                       id="textMessage"></textarea>
                     </div>
                 </div>
