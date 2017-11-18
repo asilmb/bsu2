@@ -25,12 +25,20 @@ class MailerForm extends Model
     public function rules()
     {
         return [
-            [['fromEmail', 'fromName', 'toEmail', 'subject', 'body'], 'required'],
+            [['fromEmail', 'fromName', 'body'], 'required'],
             ['fromEmail', 'email'],
             ['toEmail', 'email']
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'fromEmail' => 'Email-адрес',
+            'body' => 'Сообщение',
+            'fromName' => 'Имя',
 
+        ];
+    }
     public function sendEmail()
     {
         if ($this->validate()) {
@@ -44,21 +52,5 @@ class MailerForm extends Model
             return true;
         }
         return false;
-    }
-
-    /**
-     * @param mixed $toEmail
-     */
-    public function setToEmail($toEmail)
-    {
-        $this->toEmail = Yii::$app->params['workMail'];
-    }
-
-    /**
-     * @param mixed $subject
-     */
-    public function setSubject($subject)
-    {
-        $this->subject = Yii::$app->params['workMailSubject'];;
     }
 }

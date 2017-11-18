@@ -11,9 +11,19 @@ class MainController extends Controller
 
     public function actionIndex()
     {
+        $body = null;
         $news = Yii::$app->content->news->all();
         $extraNews = Yii::$app->content->extraNews->all();
         $directorMailModel = new MailerForm();
+        if (!empty(Yii::$app->request->post())) {
+            $body = Yii::$app->request->post();
+            $body['MailerForm']['subject'] = Yii::$app->params['workMailSubject'];
+            $body['MailerForm']['toEmail'] = Yii::$app->params['workMail'];
+        }
+        if ($directorMailModel->load($body) && $directorMailModel->sendEmail()) {
+            Yii::$app->session->setFlash('mailerFormSubmitted');
+            return $this->refresh();
+        }
         return $this->render('index', ['news' => $news, 'extraNews' => $extraNews, 'directorMailModel' => $directorMailModel]);
     }
 
@@ -28,13 +38,5 @@ class MainController extends Controller
         return $this->render('news/view', ['newsEntity' => $newsEntity, 'news' => $news]);
     }
 
-    public function actionMailer()
-    {
-        $directorMailModel = new MailerForm();
-        if ($directorMailModel->load(Yii::$app->request->post()) && $directorMailModel->sendEmail()) {
-            Yii::$app->session->setFlash('mailerFormSubmitted');
-            return $this->refresh();
-        }
-    }
 
 }
