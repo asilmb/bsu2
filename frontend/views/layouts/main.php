@@ -14,9 +14,9 @@ AppAsset::register($this);
 
             <?= $content ?>
         </div>
+
         <?= Page::snippet('footer') ?>
+
     </div>
-
-
 
 <?php Page::endDraw() ?>

@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 
 //$this->title = t('this/main', 'title');
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 ?>
 <div class="nav--sections">
@@ -27,42 +29,42 @@
 
         <div class="blog-section clearfix">
             <div class="director-image"></div>
-            <form action="/mailer" method="POST">
-                <div class="row-input">
-                    <h3>Задать вопрос генеральному директору</h3>
+            <?php $form = ActiveForm::begin(); ?>
+            <div class="row-input">
+                <h3>Задать вопрос генеральному директору</h3>
+            </div>
+            <div class="row-input">
+                <div class="input-wrapper">
+                    <?= $form->field($directorMailModel, 'fromName')->textInput(['maxlength' => '18', 'class' => 'input-wrapper',
+                        'tabindex' => '3', 'rows' => "1", 'placeholder' => "Ваше имя", 'autocomplete' => "off"])->label(false) ?>
                 </div>
-                <div class="row-input">
-                    <div class="input-wrapper">
-                        <input maxlength="18" tabindex="1" id="input1" name="fromName" type="text" placeholder="Ваше имя"
-                               autocomplete="off">
-                    </div>
+            </div>
+            <div class="row-input">
+                <div class="input-wrapper">
+                    <?= $form->field($directorMailModel, 'fromEmail')->textInput(['maxlength' => '18', 'class' => 'input-wrapper',
+                        'tabindex' => '3', 'rows' => "1", 'placeholder' => "E-mail", 'autocomplete' => "off"])->label(false) ?>
                 </div>
-                <div class="row-input">
-                    <div class="input-wrapper">
-                        <input maxlength="18" tabindex="2" id="input2"  name="fromEmail" type="text" placeholder="E-mail"
-                               autocomplete="off">
-                    </div>
+            </div>
+            <div class="row-input">
+                <div class="input-wrapper">
+                    <?= $form->field($directorMailModel, 'body')->textarea(['maxlength' => '300', 'class' => 'input-wrapper form--text',
+                        'tabindex' => '3', 'rows' => "1", 'placeholder' => "Напишите свой вопрос", 'autocomplete' => "off"])->label(false) ?>
                 </div>
-                <div class="row-input">
-                    <div class="input-wrapper form--text">
-                            <textarea rows="1" tabindex="3" name="body" placeholder="Напишите свой вопрос"
-                                      id="textMessage"></textarea>
-                    </div>
-                </div>
-                <div class="row-input">
-                    <input type="submit" class="btn" value="Отправить">
-                    <a href="#">Перейти в блог</a>
-                </div>
-            </form>
+            </div>
+            <div class="row-input">
+                <?= Html::submitButton('Отправить', ['class' => 'btn']) ?>
+                <?= Html::a('Перейти в блог', '') ?>
+            </div>
+
+
+            <?php ActiveForm::end(); ?>
         </div>
 
         <div class="news">
             <h3> Новости</h3>
-			<?= $this->render('news/listNews', ['news' => $news]); ?>
+            <?= $this->render('news/listNews', ['news' => $news]); ?>
         </div>
 
-    </div >
+    </div>
 </section>
-<script>
 
-</script>

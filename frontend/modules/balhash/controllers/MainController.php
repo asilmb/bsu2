@@ -13,7 +13,8 @@ class MainController extends Controller
     {
         $news = Yii::$app->content->news->all();
         $extraNews = Yii::$app->content->extraNews->all();
-        return $this->render('index', ['news' => $news, 'extraNews' => $extraNews]);
+        $directorMailModel = new MailerForm();
+        return $this->render('index', ['news' => $news, 'extraNews' => $extraNews, 'directorMailModel' => $directorMailModel]);
     }
 
     public function actionNews($id = null)
@@ -26,16 +27,14 @@ class MainController extends Controller
         $newsEntity = Yii::$app->content->news->oneById($id);
         return $this->render('news/view', ['newsEntity' => $newsEntity, 'news' => $news]);
     }
+
     public function actionMailer()
     {
-        $model = new MailerForm();
-        if ($model->load(Yii::$app->request->post()) && $model->sendEmail()) {
+        $directorMailModel = new MailerForm();
+        if ($directorMailModel->load(Yii::$app->request->post()) && $directorMailModel->sendEmail()) {
             Yii::$app->session->setFlash('mailerFormSubmitted');
             return $this->refresh();
         }
-        return $this->render('mailer', [
-            'model' => $model,
-        ]);
     }
 
 }
