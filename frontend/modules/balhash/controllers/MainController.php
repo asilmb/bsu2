@@ -38,5 +38,8 @@ class MainController extends Controller
         return $this->render('news/view', ['newsEntity' => $newsEntity, 'news' => $news]);
     }
 
-
+    public function actionContacts()
+    {
+        return $this->render('contacts');
+    }
 }

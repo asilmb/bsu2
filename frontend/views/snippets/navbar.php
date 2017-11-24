@@ -25,7 +25,7 @@
 			<li><a href="" title="Абонентам">Абонентам</a></li>
 			<li><a href="" title="Услуги">Услуги</a></li>
 			<li><a href="" title="Пресс-служба">Пресс-служба</a></li>
-			<li><a href="" title="Пресс-служба">Контакты</a></li>
+			<li><a href="/contacts" title="Пресс-служба">Контакты</a></li>
 			<div class="clear"></div>
 		</ul>
 	</div>

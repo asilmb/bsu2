@@ -39,6 +39,7 @@ return [
 
                 // ----------------- Main module -----------------
                 'news' => 'balhash/main/news',
+                'contacts' => 'balhash/main/contacts',
                 'mailer' => 'balhash/main/mailer',
                 'news/<id>' => 'balhash/main/news'
             ],

@@ -27,7 +27,7 @@ class MailerForm extends Model
         return [
             [['fromEmail', 'fromName', 'body'], 'required'],
             ['fromEmail', 'email'],
-            ['toEmail', 'email']
+            ['toEmail', 'email'],
         ];
     }
     public function attributeLabels()
@@ -36,7 +36,7 @@ class MailerForm extends Model
             'fromEmail' => 'Email-адрес',
             'body' => 'Сообщение',
             'fromName' => 'Имя',
-
+            'subject' => 'Тема',
         ];
     }
     public function sendEmail()
@@ -45,12 +45,24 @@ class MailerForm extends Model
             Yii::$app->mailer->compose()
                 ->setTo($this->toEmail)
                 ->setFrom([$this->fromEmail => $this->fromName])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
+                ->setSubject($this->getSubject())
+                ->setTextBody($this->getBody())
                 ->send();
 
             return true;
         }
         return false;
     }
+
+    public function getSubject()
+    {
+        return 'Обращение прислал '. $this->fromName;
+    }
+
+    public function getBody()
+    {
+        return $this->body . "\n".'Адрес обратной связи ' . $this->fromEmail;
+    }
+
+
 }

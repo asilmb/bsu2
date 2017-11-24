@@ -79,11 +79,11 @@ return [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
-                'username' => 'username@gmail.com',
-                'password' => 'password',
-                'port' => '587',
-                'encryption' => 'tls',
+                'host' => 'smtp.mail.ru',
+                'username' => 'asilbekmubarakov@mail.ru',
+                'password' => 'enoaYaic',
+                'port' => '465',
+                'encryption' => 'ssl',
             ],
         ],
 
