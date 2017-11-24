@@ -44,6 +44,5 @@ use yii\widgets\ActiveForm;
 
     </div>
 </section>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnkvoAuIU_mkku-BYTR0TxlMjDcm-V9Io&callback=initMap">
-</script>
+<?php $this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyDnkvoAuIU_mkku-BYTR0TxlMjDcm-V9Io&callback=initMap',['async'=> true, 'defer'=>true]) ?>
+
