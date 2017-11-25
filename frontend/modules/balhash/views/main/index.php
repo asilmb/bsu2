@@ -7,28 +7,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 ?>
-<div class="nav--sections">
-    <div class="container">
-        <a href="#" class="section-item"><img src="/images/receiving.png"/>
-            <p><span>Приём показаний</span></p></a>
-        <a href="#" class="section-item"><img src="./images/debt.png"/>
-            <p><span>Проверка задолженности</span></p></a>
-        <a href="#" class="section-item"><img src="/images/forum.png"/>
-            <p><span>Форум потребителей</span></p></a>
-        <a href="#" class="section-item"><img src="/images/sealing.png"/>
-            <p><span>Заявка на опломбировку</span></p></a>
-        <a href="#" class="section-item"><img src="/images/emergency_service.png"/>
-            <p><span>Заявка на аварийную службу</span></p></a>
-        <a href="#" class="section-item"><img src="/images/smart_water.png"/>
-            <p><span>Smart Вода</span></p></a>
-    </div>
-</div>
+
 <section class="main-page">
     <div class="container">
         <?= $this->render('extraNews/listNews', ['extraNews' => $extraNews]); ?>
 
         <div class="blog-section clearfix">
-            <div class="director-image"></div>
+            <div class="director-image" style="border: black solid 1px">Фотография директора Балхаш Су</div>
             <?php $form = ActiveForm::begin(); ?>
             <div class="row-input">
                 <h3>Задать вопрос генеральному директору</h3>
