@@ -26,16 +26,23 @@ use yii\widgets\ActiveForm;
 <section class="main-page">
     <div class="container">
         <div class="contacts-section clearfix">
+			<h3 class="contacts-section--title">
+				Как нас найти
+			</h3>
             <div class="contacts-section--info">
-                г.Балхаш ул.Ленина д.32
-                тел.6-50-96, 4-78-29
-                pokaz.bsy@mail.ru
+				<p>г.Балхаш ул.Ленина д.32</p>
+				<p>тел.6-50-96, 4-78-29 </p>
+				<p>pokaz.bsy@mail.ru  </p>
             </div>
 
-            <div class="contacts-section--map" id="map">
+            <div class="contacts-section--map" id="map" >
 
             </div>
-
+			<div class="contacts-section--socials">
+				<a href="" class="scl-btn twitter"></a>
+				<a href="" class="scl-btn facebook"></a>
+				<a href="" class="scl-btn google"></a>
+			</div>
 
 
 
@@ -44,5 +51,5 @@ use yii\widgets\ActiveForm;
 
     </div>
 </section>
-<?php $this->registerJsFile('https://maps.googleapis.com/maps/api/js?key=AIzaSyDnkvoAuIU_mkku-BYTR0TxlMjDcm-V9Io&callback=initMap',['async'=> true, 'defer'=>true]) ?>
+
 
