@@ -2,7 +2,7 @@
 
 namespace api\v4\modules\user\forms;
 
-use api\v4\modules\user\validators\LoginValidator;
+
 use common\base\Model;
 
 class RestorePasswordForm extends Model {
@@ -19,7 +19,6 @@ class RestorePasswordForm extends Model {
 		return [
 			[['login', 'password', 'activation_code'], 'trim'],
 			[['login', 'password', 'activation_code'], 'required'],
-			['login', LoginValidator::className()],
 			[['activation_code'], 'integer'],
 			[['activation_code'], 'string', 'length' => 6],
 			[['password'], 'string', 'min' => 8],

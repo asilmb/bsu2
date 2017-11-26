@@ -4,7 +4,7 @@ namespace api\v4\modules\user\forms;
 
 use api\v4\modules\user\helpers\LoginHelper;
 use yii\base\Model;
-use api\v4\modules\user\validators\LoginValidator;
+
 
 class LoginForm extends Model
 {
@@ -20,7 +20,6 @@ class LoginForm extends Model
 		return [
 			[['login', 'password'], 'trim'],
 			[['login', 'password'], 'required'],
-			['login', LoginValidator::className()],
 			'normalizeLogin' => ['login', 'normalizeLogin'],
 			[['password'], 'string', 'min' => 8],
 			['rememberMe', 'boolean'],
