@@ -23,7 +23,7 @@ class AppAsset extends AssetBundle
 		'js/jquery-3.2.1.min.js',
 		'js/owl.carousel.min.js',
 		'js/application.min.js',
-		'https://api-maps.yandex.ru/2.1/?lang=ru_RU'
+
 	];
 	public $depends = [
 	
