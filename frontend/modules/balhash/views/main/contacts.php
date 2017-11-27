@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->registerJsFile('https://api-maps.yandex.ru/2.1/?lang=ru_RU');
+$this->registerJsFile('/js/ymap.min.js');
 ?>
 <section class="main-page">
     <div class="container">

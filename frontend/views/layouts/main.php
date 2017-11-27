@@ -43,7 +43,7 @@ AppAsset::register($this);
 				<div class="container">
 					<a href="#" class="section-item"><img src="/images/receiving.png"/>
 						<p><span>Приём показаний</span></p></a>
-					<a href="https://epos.kz/kommun/balhashsu.php" class="section-item"><img src="./images/debt.png"/>
+					<a href="https://epos.kz/kommun/balhashsu.php" class="section-item"><img src="/images/debt.png"/>
 						<p><span>Оплата задолжности</span></p></a>
 					<a href="#" class="section-item"><img src="/images/forum.png"/>
 						<p><span>Форум потребителей</span></p></a>

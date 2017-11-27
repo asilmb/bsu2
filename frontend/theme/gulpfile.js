@@ -34,7 +34,23 @@ gulp.task('scripts', function () {
 		.pipe(browserSync.stream({mangle: false}));
 
 });
+/*production build maker*/
+gulp.task('scripts2', function () {
+	return gulp.src(['assets/js/ymap.js'])
+		.pipe(plumber({
+			errorHandler: notify.onError(function (err) {
+				return {
+					title: 'JS TASK ERROR',
+					message: err.message
+				};
+			})
+		}))
+		.pipe(concat('ymap.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('./../web/js/'))
+		.pipe(browserSync.stream({mangle: false}));
 
+});
 
 gulp.task('html-include', function () {
 	return gulp.src('./assets/pages/html/*.html')
@@ -105,25 +121,6 @@ gulp.task('img', function () {
 });
 
 
-// Watch
-gulp.task('watch', function () {
-	gulp.watch("public/*.html", ['html']);
-	gulp.watch("./assets/js/*.js", ['scripts']);
-	gulp.watch("./assets/css/**/*.sass", ['styles']);
-	gulp.watch("./assets/css/*.css", ['styles']);
-	gulp.watch(['assets/pages/**/*.html', 'assets/pages/*.html'], ['html-include']);
-	gulp.watch(["assets/images", "assets/images/*.*", 'assets/images/**/**', 'assets/images/**/**/*.*'], ['img']);
-	gulp.watch(["public/*.html"], browserSync.reload());
-});
-
-
-gulp.task('browser-sync', function () {
-	browserSync.init({
-		server: {
-			baseDir: "public"
-		}
-	});
-});
 
 // Default
 gulp.task('default', ['html', 'scripts', 'styles', 'img', 'browser-sync', 'html-include', 'watch']);
