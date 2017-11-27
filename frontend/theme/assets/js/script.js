@@ -22,3 +22,11 @@ $(document).ready(function(){
         dots: true
     });
 });
+function showDontWork() {
+	$('#dontworkOverLay').show();
+	$('body').addClass('overflow-none');
+}
+function closeDontWork() {
+	$('#dontworkOverLay').hide();
+	$('body').removeClass('overflow-none');
+}
