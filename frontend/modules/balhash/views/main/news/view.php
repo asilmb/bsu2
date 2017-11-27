@@ -18,9 +18,6 @@
     <div class="container">
         <div class="news--entity clearfix">
             <p class="news--entity-title"><?= $newsEntity->title ?></p>
-            <div class="news--entity-image">
-                <img src="<?= $newsEntity->image_url ?>"/>
-            </div>
             <p class="news--entity-body"><?= $newsEntity->body ?></p>
         </div>
         <div class="news news-bottom">
