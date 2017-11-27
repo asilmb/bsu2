@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="row-input">
                 <?= Html::submitButton('Отправить', ['class' => 'btn']) ?>
-                <?= Html::a('Перейти в блог', '') ?>
+<!--                --><?//= Html::a('Перейти в блог', '') ?>
             </div>
 
 

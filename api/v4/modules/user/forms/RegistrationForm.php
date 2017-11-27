@@ -2,7 +2,7 @@
 
 namespace api\v4\modules\user\forms;
 
-use api\v4\modules\user\validators\LoginValidator;
+
 
 class RegistrationForm extends RestorePasswordForm {
 	
@@ -14,12 +14,12 @@ class RegistrationForm extends RestorePasswordForm {
 	const SCENARIO_REQUEST = 'request';
 	const SCENARIO_CHECK = 'check';
 	const SCENARIO_CONFIRM = 'confirm';
-	
+
 	public function rules() {
 		return [
 			[['login', 'password', 'activation_code', 'email'], 'trim'],
 			[['login', 'password', 'activation_code'], 'required'],
-			['login', LoginValidator::className()],
+
 			['email', 'email'],
 			[['activation_code'], 'integer'],
 			[['activation_code'], 'string', 'length' => 6],

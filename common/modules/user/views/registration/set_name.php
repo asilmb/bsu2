@@ -11,7 +11,7 @@ $this->title = t('user/registration', 'set_name_title');
 $this->params['breadcrumbs'][] = t('user/registration', 'title');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-create">
+<div class="container">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?= t('user/registration', 'set_name_text') ?></p>

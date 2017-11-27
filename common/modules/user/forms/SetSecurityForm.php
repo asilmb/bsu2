@@ -17,7 +17,7 @@ class SetSecurityForm extends Model
 	public function rules()
 	{
 		return [
-			[['email', 'email_repeat', 'password', 'password_repeat'], 'trim'],
+			[['email',  'password', 'password_repeat'], 'trim'],
 			[['email',  'password', 'password_repeat'], 'required'],
 			['email', 'email'],
 			['password', 'string', 'min' => 6],

@@ -5,9 +5,8 @@
 //$this->title = t('this/main', 'title');
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+$this->registerJsFile('https://api-maps.yandex.ru/2.1/?lang=ru_RU');
 ?>
-
 <section class="main-page">
     <div class="container">
         <div class="contacts-section clearfix">

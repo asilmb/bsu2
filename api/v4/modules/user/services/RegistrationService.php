@@ -14,7 +14,6 @@ class RegistrationService extends BaseService {
 	public function createTempAccount($login, $email = null) {
 		$body = compact(['login', 'email']);
 		$this->validateForm(RegistrationForm::className(), $body, RegistrationForm::SCENARIO_REQUEST);
-		$this->checkLoginExistsInTps($login);
 		$activation_code = $this->repository->generateActivationCode();
 		Yii::$app->account->temp->create($login, $email, $activation_code);
 		$this->sendSmsWithActivationCode($login, $activation_code);

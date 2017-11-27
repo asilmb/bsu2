@@ -11,7 +11,7 @@ $this->title = t('user/registration', 'set_password_title');
 $this->params['breadcrumbs'][] = t('user/registration', 'title');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-create">
+<div class="container">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?= t('user/registration', 'set_password_text') ?></p>
@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	        <?= $form->field($model, 'email') ?>
 	
-	        <?= $form->field($model, 'email_repeat') ?>
 
             <div class="form-group">
 	            <?= Html::submitButton(t('action', 'next'), [
