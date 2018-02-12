@@ -5,7 +5,7 @@
 //$this->title = t('this/main', 'title');
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+$this->registerCss('');
 ?>
 
 <section class="main-page">

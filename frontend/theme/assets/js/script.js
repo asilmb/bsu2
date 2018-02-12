@@ -10,7 +10,7 @@ $(document).ready(function(){
     $('.news-body').owlCarousel({
         items: 4,
         margin: 10,
-		loop:true,
+		loop: true,
         nav: false,
         dots: true
     });
@@ -18,8 +18,9 @@ $(document).ready(function(){
         items: 1,
         margin: 10,
         loop:true,
-        nav: false,
-        dots: true
+        nav:true,
+        dots:true,
+		navText : ["",""]
     });
 });
 function showDontWork() {

@@ -1,3 +1,6 @@
+@font-face
+  font-family: glyphicons-halflings-regular
+  src: url(/../bootstrap/fonts/glyphicons-halflings-regular.woff)
 .main-page
   background-color: #F2F2F2
   padding: 20px 0
@@ -16,6 +19,35 @@
     font-size: 16px
   .notifications-slider
     height: 100%
+    width: 80%
+    margin: 0 auto
+    .owl-nav
+      .owl-prev
+        background: url(/../images/back.png) no-repeat
+        background-size: contain
+        position: absolute
+        left: -120px
+        top: 38%
+        width: 15px
+        transform: scale(1,1.4)
+        height: 45px
+        &:hover,&:active
+          background: url(/../images/back.png) no-repeat
+          background-size: contain
+          opacity: 0.8
+      .owl-next
+        background: url(/../images/back.png) no-repeat
+        background-size: contain
+        position: absolute
+        right: -120px
+        top: 38%
+        width: 15px
+        transform: scale(1,1.4) rotate(180deg)
+        height: 45px
+        &:hover,&:active
+          background: url(/../images/back.png) no-repeat
+          background-size: contain
+          opacity: 0.8
 .row-input+.row-input
   margin-top: 20px
 .row-input
